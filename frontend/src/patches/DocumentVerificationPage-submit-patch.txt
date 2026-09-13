@@ -1,0 +1,23 @@
+In DocumentVerificationPage.jsx, replace the successful part of handleSubmit:
+
+const response = await submitDocumentVerification({ files, remarks });
+setSuccess(response.message || "Documents submitted successfully");
+setFiles({});
+Object.values(inputRefs.current).forEach((input) => {
+  if (input) input.value = "";
+});
+await loadPage();
+
+with:
+
+const response = await submitDocumentVerification({ files, remarks });
+setFiles({});
+Object.values(inputRefs.current).forEach((input) => {
+  if (input) input.value = "";
+});
+navigate("/document-verification/application-review", {
+  replace: true,
+  state: {
+    message: response.message || "Documents submitted successfully",
+  },
+});

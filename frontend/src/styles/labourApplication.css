@@ -1,0 +1,429 @@
+.labour-content {
+  width: calc(100% - 56px);
+  max-width: 1320px;
+  min-height: calc(100vh - 58px);
+  margin: 0 auto;
+  padding: 32px 0 58px;
+}
+
+.labour-page-header {
+  margin-bottom: 25px;
+}
+
+.labour-back-link {
+  margin: 0 0 12px;
+  padding: 0;
+  border: 0;
+  color: #596b78;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 650;
+}
+
+.labour-heading-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.labour-heading-row h1 {
+  margin: 0 0 8px;
+  color: #112a3c;
+  font-size: 34px;
+  letter-spacing: -0.9px;
+}
+
+.labour-heading-row p {
+  max-width: 760px;
+  margin: 0;
+  color: #65727d;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.labour-status {
+  flex-shrink: 0;
+  padding: 8px 13px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.labour-status.draft {
+  color: #80580d;
+  background: #ffe7ae;
+}
+
+.labour-status.submitted,
+.labour-status.under_review {
+  color: #215573;
+  background: #dbeaf4;
+}
+
+.labour-status.approved {
+  color: #087244;
+  background: #d9f5e5;
+}
+
+.labour-status.rejected {
+  color: #a1271d;
+  background: #fde7e5;
+}
+
+.labour-top-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.62fr) minmax(320px, 0.9fr);
+  align-items: stretch;
+  gap: 24px;
+}
+
+.labour-left-column {
+  display: grid;
+  gap: 24px;
+}
+
+.labour-card {
+  overflow: hidden;
+  border: 1px solid #d7dfe7;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(25, 47, 63, 0.045);
+}
+
+.labour-card-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 21px 23px;
+  border-bottom: 1px solid #e0e6ec;
+  color: #16415c;
+}
+
+.labour-card-header h2 {
+  margin: 0;
+  color: #172f40;
+  font-size: 18px;
+}
+
+.labour-card-body {
+  display: grid;
+  gap: 19px;
+  padding: 23px;
+}
+
+.labour-two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.labour-field {
+  display: grid;
+  gap: 7px;
+  color: #263b4b;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.labour-field input,
+.labour-field select {
+  width: 100%;
+  height: 45px;
+  padding: 0 12px;
+  border: 1px solid #cad4dd;
+  border-radius: 6px;
+  outline: 0;
+  color: #263b4c;
+  background: #f8f9fc;
+  font-size: 12px;
+}
+
+.labour-field input:focus,
+.labour-field select:focus {
+  border-color: #1b4b6b;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(27, 75, 107, 0.09);
+}
+
+.labour-input-icon {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  border: 1px solid #cad4dd;
+  border-radius: 6px;
+  color: #7a8995;
+  background: #f8f9fc;
+}
+
+.labour-input-icon:focus-within {
+  border-color: #1b4b6b;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(27, 75, 107, 0.09);
+}
+
+.labour-input-icon input {
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.workforce-card {
+  min-height: 100%;
+}
+
+.workforce-card .labour-card-body {
+  height: calc(100% - 64px);
+  align-content: start;
+}
+
+.workforce-group h3 {
+  margin: 0 0 13px;
+  color: #64717c;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.65px;
+}
+
+.workforce-group small {
+  display: block;
+  margin-top: 9px;
+  color: #7c8993;
+  font-size: 9px;
+}
+
+.workforce-divider {
+  border-top: 1px solid #dce3e9;
+}
+
+.workforce-illustration {
+  display: grid;
+  place-items: center;
+  min-height: 105px;
+  margin-top: auto;
+  color: #d3dbe1;
+}
+
+.establishment-card {
+  margin-top: 24px;
+}
+
+.establishment-grid {
+  grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr);
+}
+
+.address-field {
+  grid-column: 1;
+}
+
+.establishment-grid > .labour-field:nth-child(3),
+.establishment-grid > .labour-field:nth-child(4),
+.labour-operating-status {
+  grid-row: 2;
+}
+
+.labour-operating-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 45px;
+  padding: 7px 12px;
+  border: 1px solid #cad4dd;
+  border-radius: 6px;
+  background: #f8f9fc;
+}
+
+.labour-operating-status span,
+.labour-operating-status strong,
+.labour-operating-status small {
+  display: block;
+}
+
+.labour-operating-status strong {
+  color: #394d5c;
+  font-size: 10px;
+}
+
+.labour-operating-status small {
+  margin-top: 3px;
+  color: #61717d;
+  font-size: 10px;
+}
+
+.labour-operating-status input {
+  appearance: none;
+  width: 39px;
+  height: 22px;
+  padding: 2px;
+  border-radius: 999px;
+  background: #aebbc4;
+  transition: background 150ms ease;
+}
+
+.labour-operating-status input::before {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 150ms ease;
+}
+
+.labour-operating-status input:checked {
+  background: #08283d;
+}
+
+.labour-operating-status input:checked::before {
+  transform: translateX(17px);
+}
+
+.labour-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 11px;
+  margin-top: 27px;
+  padding-top: 18px;
+  border-top: 1px solid #d7dfe6;
+}
+
+.labour-cancel-button,
+.labour-draft-button,
+.labour-continue-button,
+.labour-submit-button {
+  min-width: 105px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0 17px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.labour-cancel-button,
+.labour-draft-button {
+  border: 1px solid #c6d0d9;
+  color: #4e5f6c;
+  background: #ffffff;
+}
+
+.labour-continue-button,
+.labour-submit-button {
+  border: 1px solid #08283d;
+  color: #ffffff;
+  background: #08283d;
+}
+
+.labour-continue-button:hover,
+.labour-submit-button:hover {
+  background: #123f5b;
+}
+
+.labour-actions button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.labour-alert {
+  margin-bottom: 19px;
+  padding: 13px 15px;
+  border: 1px solid;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.labour-alert.error {
+  border-color: #f0b7b2;
+  color: #a1271d;
+  background: #fff2f1;
+}
+
+.labour-alert.success {
+  border-color: #a6dabb;
+  color: #106b3a;
+  background: #edf9f1;
+}
+
+.labour-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  color: #526675;
+}
+
+.labour-spinner {
+  animation: labour-spin 800ms linear infinite;
+}
+
+@keyframes labour-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1080px) {
+  .labour-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workforce-card .labour-card-body {
+    height: auto;
+  }
+
+  .workforce-illustration {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .labour-content {
+    width: calc(100% - 28px);
+    padding-top: 24px;
+  }
+
+  .labour-heading-row {
+    flex-direction: column;
+  }
+
+  .labour-heading-row h1 {
+    font-size: 27px;
+  }
+
+  .labour-two-columns,
+  .establishment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .address-field,
+  .establishment-grid > .labour-field:nth-child(3),
+  .establishment-grid > .labour-field:nth-child(4),
+  .labour-operating-status {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .labour-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    flex-wrap: wrap;
+    padding: 12px 0;
+    background: rgba(245, 247, 251, 0.96);
+  }
+
+  .labour-actions button {
+    flex: 1 1 calc(50% - 6px);
+  }
+}

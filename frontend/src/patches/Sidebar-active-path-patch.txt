@@ -1,0 +1,21 @@
+Update the Sidebar component signature:
+
+function Sidebar({ forceActivePath = "" }) {
+
+When rendering each NavLink, change the active class expression so the forced path can activate Subscriptions:
+
+<NavLink
+  to={item.path}
+  className={({ isActive }) =>
+    [
+      "sidebar-link",
+      isActive || forceActivePath === item.path ? "active" : "",
+    ]
+      .filter(Boolean)
+      .join(" ")
+  }
+>
+
+The payment page renders:
+
+<Sidebar forceActivePath="/subscriptions" />

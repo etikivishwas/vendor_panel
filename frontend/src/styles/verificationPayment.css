@@ -1,0 +1,355 @@
+.verification-payment-content {
+    width: calc(100% - 56px);
+    max-width: 1120px;
+    min-height: calc(100vh - 58px);
+    margin: 0 auto;
+    padding: 34px 0 64px
+}
+
+.verification-payment-header {
+    margin-bottom: 27px
+}
+
+.verification-payment-header h1 {
+    margin: 0 0 8px;
+    color: #0d2538;
+    font-size: 34px;
+    letter-spacing: -.8px
+}
+
+.verification-payment-header p {
+    margin: 0;
+    color: #677580;
+    font-size: 14px
+}
+
+.verification-payment-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(310px, .72fr);
+    align-items: start;
+    gap: 23px
+}
+
+.payment-method-area {
+    display: grid;
+    gap: 18px
+}
+
+.verification-payment-card,
+.verification-order-card {
+    border: 1px solid #d3dce4;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 16px rgba(26, 48, 64, .05)
+}
+
+.verification-payment-card>header {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 20px 22px 7px;
+    color: #173e58
+}
+
+.verification-payment-card h2,
+.verification-order-card h2 {
+    margin: 0;
+    color: #172e3e;
+    font-size: 18px
+}
+
+.payment-method-list {
+    display: grid;
+    gap: 10px;
+    padding: 13px 22px 22px
+}
+
+.payment-method-list>button {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr) 22px;
+    align-items: center;
+    gap: 11px;
+    min-height: 66px;
+    padding: 12px 14px;
+    border: 1px solid #ccd5dd;
+    border-radius: 7px;
+    color: #526472;
+    background: #fff;
+    text-align: left
+}
+
+.payment-method-list>button.selected {
+    border: 2px solid #153b54;
+    background: #f4f8fb
+}
+
+.payment-radio {
+    width: 14px;
+    height: 14px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #a9b5be;
+    border-radius: 50%
+}
+
+.payment-radio>span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #092a40
+}
+
+.payment-method-copy strong,
+.payment-method-copy small {
+    display: block
+}
+
+.payment-method-copy strong {
+    color: #263c4b;
+    font-size: 13px
+}
+
+.payment-method-copy small {
+    margin-top: 4px;
+    color: #74818a;
+    font-size: 10px
+}
+
+.upi-card {
+    padding-bottom: 20px
+}
+
+.upi-entry-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 92px;
+    gap: 11px;
+    padding: 11px 22px 0
+}
+
+.upi-entry-row input {
+    height: 45px;
+    padding: 0 13px;
+    border: 1px solid #cbd5dd;
+    border-radius: 6px;
+    outline: 0;
+    background: #f9fafc
+}
+
+.upi-entry-row input:focus {
+    border-color: #173f59;
+    box-shadow: 0 0 0 3px rgba(23, 63, 89, .08)
+}
+
+.upi-entry-row button,
+.gateway-card>button {
+    height: 45px;
+    border: 0;
+    border-radius: 6px;
+    color: #fff;
+    background: #08283d;
+    font-size: 12px;
+    font-weight: 800
+}
+
+.gateway-card {
+    display: grid;
+    grid-template-columns: 35px minmax(0, 1fr) 105px;
+    align-items: center;
+    gap: 13px;
+    padding: 22px;
+    color: #17405b
+}
+
+.gateway-card h2 {
+    margin: 0 0 4px
+}
+
+.gateway-card p {
+    margin: 0;
+    color: #687681;
+    font-size: 10px;
+    line-height: 1.45
+}
+
+.verification-order-card {
+    position: sticky;
+    top: 24px;
+    padding: 23px
+}
+
+.verification-order-card h2 {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #d8e0e6
+}
+
+.order-certificate {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 17px 0;
+    padding: 13px;
+    border-radius: 7px;
+    color: #0c6846;
+    background: #eaf8f1
+}
+
+.order-certificate strong,
+.order-certificate small {
+    display: block
+}
+
+.order-certificate strong {
+    font-size: 12px
+}
+
+.order-certificate small {
+    margin-top: 3px;
+    color: #61756c;
+    font-size: 9px
+}
+
+.order-line,
+.order-subtotal,
+.order-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px
+}
+
+.order-line {
+    padding: 8px 0;
+    color: #53636f;
+    font-size: 11px
+}
+
+.order-line strong {
+    color: #263c4b
+}
+
+.order-subtotal {
+    margin-top: 10px;
+    padding: 16px 0 8px;
+    border-top: 1px solid #d8e0e6;
+    color: #3f5260;
+    font-size: 12px;
+    font-weight: 750
+}
+
+.order-total {
+    margin-top: 11px;
+    padding-top: 17px;
+    border-top: 1px solid #d8e0e6;
+    color: #172e3e;
+    font-size: 16px;
+    font-weight: 800
+}
+
+.order-total strong {
+    font-size: 23px
+}
+
+.pay-now-button {
+    width: 100%;
+    height: 47px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 21px;
+    border: 0;
+    border-radius: 6px;
+    color: #fff;
+    background: #08283d;
+    font-size: 13px;
+    font-weight: 800
+}
+
+.pay-now-button:disabled {
+    opacity: .65;
+    cursor: not-allowed
+}
+
+.encrypted-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 12px;
+    color: #657580;
+    text-align: center;
+    font-size: 9px
+}
+
+.verification-payment-alert {
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border: 1px solid;
+    border-radius: 7px;
+    font-size: 12px
+}
+
+.verification-payment-alert.error {
+    border-color: #f0b7b2;
+    color: #a1271d;
+    background: #fff2f1
+}
+
+.verification-payment-alert.success {
+    border-color: #a6dabb;
+    color: #106b3a;
+    background: #edf9f1
+}
+
+.verification-payment-loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    color: #526675
+}
+
+.verification-payment-spinner {
+    animation: verification-payment-spin .8s linear infinite
+}
+
+@keyframes verification-payment-spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+@media(max-width:900px) {
+    .verification-payment-layout {
+        grid-template-columns: 1fr
+    }
+
+    .verification-order-card {
+        position: static;
+        order: -1
+    }
+}
+
+@media(max-width:620px) {
+    .verification-payment-content {
+        width: calc(100% - 28px);
+        padding-top: 25px
+    }
+
+    .verification-payment-header h1 {
+        font-size: 28px
+    }
+
+    .upi-entry-row {
+        grid-template-columns: 1fr
+    }
+
+    .gateway-card {
+        grid-template-columns: 35px minmax(0, 1fr)
+    }
+
+    .gateway-card>button {
+        grid-column: 1/-1
+    }
+}

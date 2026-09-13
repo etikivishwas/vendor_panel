@@ -1,0 +1,34 @@
+1. At the top of documentVerificationController.js add:
+
+const {
+  createVerificationNotification,
+} = require("../services/vendorNotificationService");
+
+2. In submitDocumentVerification, replace the submission upsert block with the following so the submission ID is always available:
+
+await connection.execute(
+  `INSERT INTO vendor_verification_submissions
+     (vendor_id, status, submitted_at, reviewed_at, reviewer_remarks)
+   VALUES (?, 'pending_review', NOW(), NULL, NULL)
+   ON DUPLICATE KEY UPDATE
+     status = 'pending_review', submitted_at = NOW(),
+     reviewed_at = NULL, reviewer_remarks = NULL`,
+  [vendorId]
+);
+
+const [submissionRows] = await connection.execute(
+  `SELECT id
+   FROM vendor_verification_submissions
+   WHERE vendor_id = ?
+   ORDER BY id DESC
+   LIMIT 1`,
+  [vendorId]
+);
+
+await createVerificationNotification(connection, {
+  vendorId,
+  submissionId: Number(submissionRows[0].id),
+  status: "pending_review",
+});
+
+Keep this code inside the existing database transaction and before connection.commit().

@@ -1,0 +1,425 @@
+.gst-content {
+    width: calc(100% - 56px);
+    max-width: 1320px;
+    min-height: calc(100vh - 58px);
+    margin: 0 auto;
+    padding: 28px 0 58px
+}
+
+.gst-page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 20px
+}
+
+.gst-page-header button {
+    padding: 0;
+    border: 0;
+    color: #536b7b;
+    background: transparent;
+    font-size: 10px
+}
+
+.gst-page-header h1 {
+    margin: 8px 0 7px;
+    color: #122b3d;
+    font-size: 30px
+}
+
+.gst-page-header p {
+    margin: 0;
+    color: #697681;
+    font-size: 12px
+}
+
+.gst-status {
+    padding: 8px 13px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: capitalize
+}
+
+.gst-status.draft {
+    color: #80580d;
+    background: #ffe7ae
+}
+
+.gst-status.submitted,
+.gst-status.under_review {
+    color: #215573;
+    background: #dbeaf4
+}
+
+.gst-status.approved {
+    color: #087244;
+    background: #d9f5e5
+}
+
+.gst-status.rejected {
+    color: #a1271d;
+    background: #fde7e5
+}
+
+.gst-stepper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 23px;
+    padding: 17px 20px;
+    border: 1px solid #d5dee7;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(20, 43, 59, .04)
+}
+
+.gst-stepper button {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    border: 0;
+    color: #6b7984;
+    background: transparent;
+    font-size: 10px
+}
+
+.gst-stepper button:not(:last-child):after {
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: 58%;
+    width: 84%;
+    height: 2px;
+    background: #d7e1e9
+}
+
+.gst-stepper button.complete:not(:last-child):after,
+.gst-stepper button.active:not(:last-child):after {
+    background: #173e57
+}
+
+.gst-stepper button span {
+    position: relative;
+    z-index: 1;
+    width: 29px;
+    height: 29px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #dce8f2;
+    color: #456073;
+    font-weight: 800
+}
+
+.gst-stepper button.active span,
+.gst-stepper button.complete span {
+    color: #fff;
+    background: #08283d
+}
+
+.gst-stepper button.active small {
+    color: #132d40;
+    font-weight: 800
+}
+
+.gst-form-card,
+.gst-review-card {
+    overflow: hidden;
+    border: 1px solid #d5dee7;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(25, 47, 63, .045)
+}
+
+.gst-form-card>header,
+.gst-review-card>header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 22px 24px;
+    border-bottom: 1px solid #e1e7ec;
+    color: #16415c
+}
+
+.gst-form-card h2,
+.gst-review-card h2 {
+    margin: 0;
+    color: #192f40;
+    font-size: 18px
+}
+
+.gst-review-card header p {
+    margin: 4px 0 0;
+    color: #6c7983;
+    font-size: 10px
+}
+
+.gst-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    padding: 25px
+}
+
+.gst-form-grid label {
+    display: grid;
+    gap: 7px;
+    color: #283d4d;
+    font-size: 10px;
+    font-weight: 700
+}
+
+.gst-form-grid label.full {
+    grid-column: 1/-1
+}
+
+.gst-form-grid input,
+.gst-form-grid select {
+    width: 100%;
+    height: 45px;
+    padding: 0 12px;
+    border: 1px solid #cad4dd;
+    border-radius: 6px;
+    outline: 0;
+    color: #263b4c;
+    background: #f8f9fc;
+    font-size: 12px
+}
+
+.gst-form-grid input:focus,
+.gst-form-grid select:focus {
+    border-color: #1b4b6b;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(27, 75, 107, .09)
+}
+
+.gst-input-icon {
+    height: 45px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 11px;
+    border: 1px solid #cad4dd;
+    border-radius: 6px;
+    color: #7a8995;
+    background: #f8f9fc
+}
+
+.gst-input-icon input {
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none
+}
+
+.gst-review-sections {
+    display: grid;
+    gap: 18px;
+    padding: 24px
+}
+
+.gst-review-section {
+    padding: 18px;
+    border: 1px solid #dce4ea;
+    border-radius: 8px;
+    background: #fafbfd
+}
+
+.gst-review-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px
+}
+
+.gst-review-heading h3 {
+    margin: 0;
+    color: #203747;
+    font-size: 14px
+}
+
+.gst-review-heading button {
+    border: 0;
+    color: #225776;
+    background: transparent;
+    font-size: 11px;
+    font-weight: 700
+}
+
+.gst-review-section dl {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px 22px;
+    margin: 0
+}
+
+.gst-review-section dl div {
+    min-width: 0
+}
+
+.gst-review-section dt {
+    color: #7a8791;
+    font-size: 9px;
+    text-transform: uppercase
+}
+
+.gst-review-section dd {
+    margin: 4px 0 0;
+    overflow-wrap: anywhere;
+    color: #2c4150;
+    font-size: 12px
+}
+
+.gst-declaration {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 24px 24px;
+    padding: 15px;
+    border: 1px solid #d7e0e7;
+    border-radius: 7px;
+    color: #40535f;
+    background: #f7f9fb;
+    font-size: 11px
+}
+
+.gst-declaration input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #08283d
+}
+
+.gst-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 11px;
+    margin-top: 24px
+}
+
+.gst-secondary,
+.gst-primary {
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 17px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700
+}
+
+.gst-secondary {
+    border: 1px solid #c7d1da;
+    color: #50616e;
+    background: #fff
+}
+
+.gst-primary {
+    border: 1px solid #08283d;
+    color: #fff;
+    background: #08283d
+}
+
+.gst-primary:hover {
+    background: #123f5b
+}
+
+.gst-actions button:disabled {
+    opacity: .65;
+    cursor: not-allowed
+}
+
+.gst-alert {
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border: 1px solid;
+    border-radius: 7px;
+    font-size: 12px
+}
+
+.gst-alert.error {
+    border-color: #f0b7b2;
+    color: #a1271d;
+    background: #fff2f1
+}
+
+.gst-alert.success {
+    border-color: #a6dabb;
+    color: #106b3a;
+    background: #edf9f1
+}
+
+.gst-loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    color: #526675
+}
+
+.gst-spinner {
+    animation: gst-spin .8s linear infinite
+}
+
+@keyframes gst-spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+@media(max-width:760px) {
+    .gst-content {
+        width: calc(100% - 28px);
+        padding-top: 23px
+    }
+
+    .gst-page-header {
+        flex-direction: column
+    }
+
+    .gst-page-header h1 {
+        font-size: 26px
+    }
+
+    .gst-stepper {
+        padding: 14px 5px
+    }
+
+    .gst-stepper button:not(:last-child):after {
+        left: 62%;
+        width: 76%
+    }
+
+    .gst-stepper button small {
+        font-size: 8px
+    }
+
+    .gst-form-grid,
+    .gst-review-section dl {
+        grid-template-columns: 1fr
+    }
+
+    .gst-form-grid label.full {
+        grid-column: auto
+    }
+
+    .gst-actions {
+        position: sticky;
+        bottom: 0;
+        z-index: 5;
+        flex-wrap: wrap;
+        padding: 12px 0;
+        background: rgba(245, 247, 251, .96)
+    }
+
+    .gst-secondary,
+    .gst-primary {
+        flex: 1 1 calc(50% - 6px)
+    }
+}

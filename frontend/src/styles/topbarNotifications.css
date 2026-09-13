@@ -1,0 +1,249 @@
+.notification-menu {
+    position: relative
+}
+
+.icon-button.active {
+    color: #0b3a55;
+    background: #e9f1f6
+}
+
+.notification-dot {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 7px;
+    height: 7px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #e43f38
+}
+
+.notification-count {
+    position: absolute;
+    top: -4px;
+    right: -5px;
+    min-width: 17px;
+    height: 17px;
+    display: grid;
+    place-items: center;
+    padding: 0 4px;
+    border: 2px solid #fff;
+    border-radius: 999px;
+    color: #fff;
+    background: #d9342b;
+    font-size: 8px;
+    font-weight: 800
+}
+
+.notification-dropdown {
+    position: absolute;
+    z-index: 80;
+    top: calc(100% + 13px);
+    right: -8px;
+    width: 390px;
+    overflow: hidden;
+    border: 1px solid #d5dfe7;
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: 0 18px 45px rgba(10, 34, 49, .2);
+    animation: notification-in .16s ease-out
+}
+
+.notification-dropdown:before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    right: 21px;
+    width: 13px;
+    height: 13px;
+    border-top: 1px solid #d5dfe7;
+    border-left: 1px solid #d5dfe7;
+    background: #fff;
+    transform: rotate(45deg)
+}
+
+.notification-dropdown>header {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 17px 18px 14px;
+    border-bottom: 1px solid #e1e7ec
+}
+
+.notification-dropdown h2 {
+    margin: 0 0 3px;
+    color: #152d3f;
+    font-size: 16px
+}
+
+.notification-dropdown header p {
+    margin: 0;
+    color: #73808a;
+    font-size: 10px
+}
+
+.notification-dropdown header button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    border: 0;
+    color: #176043;
+    background: transparent;
+    font-size: 9px;
+    font-weight: 750
+}
+
+.notification-list {
+    max-height: 410px;
+    overflow-y: auto
+}
+
+.notification-item {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) 8px;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 14px 16px;
+    border: 0;
+    border-bottom: 1px solid #e7ebef;
+    background: #fff;
+    text-align: left
+}
+
+.notification-item:hover {
+    background: #f6f9fb
+}
+
+.notification-item.unread {
+    background: #eef6ff
+}
+
+.notification-item.unread:hover {
+    background: #e7f2fd
+}
+
+.notification-type-icon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    color: #31586f;
+    background: #e3edf4
+}
+
+.notification-type-icon.verification_submitted {
+    color: #805713;
+    background: #fff0cc
+}
+
+.notification-type-icon.verification_approved {
+    color: #08714a;
+    background: #d9f5e6
+}
+
+.notification-type-icon.verification_rejected {
+    color: #a12b21;
+    background: #fde7e5
+}
+
+.notification-copy,
+.notification-copy strong,
+.notification-copy>span,
+.notification-copy small {
+    display: block;
+    min-width: 0
+}
+
+.notification-copy strong {
+    margin-bottom: 4px;
+    color: #203746;
+    font-size: 11px
+}
+
+.notification-copy>span {
+    display: -webkit-box;
+    overflow: hidden;
+    color: #63717c;
+    font-size: 10px;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2
+}
+
+.notification-copy small {
+    margin-top: 6px;
+    color: #89949c;
+    font-size: 8px
+}
+
+.notification-unread-marker {
+    align-self: center;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #2d78aa
+}
+
+.notification-empty {
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 24px;
+    color: #7b8791;
+    text-align: center;
+    font-size: 10px
+}
+
+.notification-empty strong {
+    color: #425664;
+    font-size: 12px
+}
+
+.notification-empty.error {
+    color: #a1271d
+}
+
+.notification-spinner {
+    animation: notification-spin .8s linear infinite
+}
+
+@keyframes notification-in {
+    from {
+        opacity: 0;
+        transform: translateY(-5px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@keyframes notification-spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+@media(max-width:560px) {
+    .notification-dropdown {
+        position: fixed;
+        top: 64px;
+        right: 12px;
+        left: 12px;
+        width: auto
+    }
+
+    .notification-dropdown:before {
+        display: none
+    }
+}

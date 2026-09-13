@@ -1,0 +1,166 @@
+.vendor-menu-wrapper {
+  position: relative;
+}
+
+.vendor-menu.active {
+  background: #edf3f7;
+}
+
+.vendor-menu-chevron {
+  transition: transform 160ms ease;
+}
+
+.vendor-menu-chevron.open {
+  transform: rotate(180deg);
+}
+
+.vendor-account-dropdown {
+  position: absolute;
+  z-index: 90;
+  top: calc(100% + 13px);
+  right: 0;
+  width: 300px;
+  overflow: hidden;
+  border: 1px solid #d5dfe7;
+  border-radius: 11px;
+  background: #ffffff;
+  box-shadow: 0 18px 45px rgba(10, 34, 49, 0.2);
+  animation: vendor-dropdown-in 160ms ease-out;
+}
+
+.vendor-account-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: 24px;
+  width: 13px;
+  height: 13px;
+  border-top: 1px solid #d5dfe7;
+  border-left: 1px solid #d5dfe7;
+  background: #ffffff;
+  transform: rotate(45deg);
+}
+
+.vendor-account-dropdown > header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 17px;
+  border-bottom: 1px solid #e1e7ec;
+  background: #f8fafc;
+}
+
+.vendor-dropdown-avatar {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: #ffffff;
+  background: #496a7e;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.vendor-account-dropdown header strong,
+.vendor-account-dropdown header small {
+  display: block;
+  max-width: 205px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vendor-account-dropdown header strong {
+  color: #183144;
+  font-size: 13px;
+}
+
+.vendor-account-dropdown header small {
+  margin-top: 4px;
+  color: #74818b;
+  font-size: 9px;
+}
+
+.vendor-account-actions {
+  display: grid;
+  padding: 7px;
+}
+
+.vendor-account-actions > button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  padding: 11px 10px;
+  border: 0;
+  border-radius: 7px;
+  color: #38505f;
+  background: transparent;
+  text-align: left;
+}
+
+.vendor-account-actions > button:hover {
+  background: #f0f5f8;
+}
+
+.vendor-account-actions > button span,
+.vendor-account-actions > button strong,
+.vendor-account-actions > button small {
+  display: block;
+}
+
+.vendor-account-actions > button strong {
+  color: #253d4d;
+  font-size: 11px;
+}
+
+.vendor-account-actions > button small {
+  margin-top: 3px;
+  color: #7b8790;
+  font-size: 8px;
+}
+
+.vendor-account-actions .vendor-logout-button {
+  margin-top: 4px;
+  border-top: 1px solid #e3e8ec;
+  border-radius: 0 0 7px 7px;
+  color: #b02d24;
+}
+
+.vendor-account-actions .vendor-logout-button:hover {
+  background: #fff0ef;
+}
+
+.vendor-account-actions .vendor-logout-button strong {
+  color: #a22a21;
+}
+
+@keyframes vendor-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 560px) {
+  .vendor-account-dropdown {
+    position: fixed;
+    top: 64px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+
+  .vendor-account-dropdown::before {
+    display: none;
+  }
+}
