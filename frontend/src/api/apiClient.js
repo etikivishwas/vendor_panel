@@ -12,13 +12,29 @@ const apiClient = axios.create({
   },
 });
 
-apiClient.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem(
+const getVendorToken = () => {
+  const storedToken =
+    localStorage.getItem(
       "vendorToken"
     );
 
+  if (!storedToken) {
+    return null;
+  }
+
+  return storedToken
+    .replace(/^Bearer\s+/i, "")
+    .trim();
+};
+
+apiClient.interceptors.request.use(
+  (config) => {
+    const token = getVendorToken();
+
     if (token) {
+      config.headers =
+        config.headers || {};
+
       config.headers.Authorization =
         `Bearer ${token}`;
     }
@@ -26,22 +42,70 @@ apiClient.interceptors.request.use(
     return config;
   },
 
-  (error) => Promise.reject(error)
+  (error) => {
+    return Promise.reject(error);
+  }
 );
 
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    return response;
+  },
 
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("vendorToken");
-      localStorage.removeItem("vendor");
+    const status =
+      error.response?.status;
 
+    const code =
+      error.response?.data?.code;
+
+    if (status === 401) {
+      localStorage.removeItem(
+        "vendorToken"
+      );
+
+      localStorage.removeItem(
+        "vendor"
+      );
+
+      /*
+        Avoid redirecting repeatedly if the
+        current page is already the login page.
+      */
       if (
-        window.location.pathname !== "/login"
+        window.location.pathname !==
+        "/login"
       ) {
-        window.location.href = "/login";
+        const message =
+          error.response?.data?.message ||
+          "Your vendor session has expired. Please log in again.";
+
+        sessionStorage.setItem(
+          "vendorLoginMessage",
+          message
+        );
+
+        window.location.replace(
+          "/login"
+        );
       }
+    }
+
+    if (
+      status === 403 &&
+      code === "VENDOR_ROLE_REQUIRED"
+    ) {
+      localStorage.removeItem(
+        "vendorToken"
+      );
+
+      localStorage.removeItem(
+        "vendor"
+      );
+
+      window.location.replace(
+        "/login"
+      );
     }
 
     return Promise.reject(error);

@@ -58,10 +58,48 @@ function LoginPage() {
         password: form.password,
       });
 
-      localStorage.setItem("vendorToken", response.data.data.token);
+      const token =
+        response.data?.data?.token;
+
+      const vendor =
+        response.data?.data?.vendor;
+
+      if (!token) {
+        throw new Error(
+          "The server did not return a vendor authentication token"
+        );
+      }
+
+      if (!vendor?.id) {
+        throw new Error(
+          "The server did not return a valid vendor profile"
+        );
+      }
+
+      /*
+        Remove tokens that could belong to other
+        applications or old login sessions.
+      */
+      localStorage.removeItem(
+        "accessToken"
+      );
+
+      localStorage.removeItem(
+        "token"
+      );
+
+      localStorage.removeItem(
+        "vendorAccessToken"
+      );
+
+      localStorage.setItem(
+        "vendorToken",
+        token
+      );
+
       localStorage.setItem(
         "vendor",
-        JSON.stringify(response.data.data.vendor)
+        JSON.stringify(vendor)
       );
 
       if (rememberMe) {
@@ -74,7 +112,7 @@ function LoginPage() {
     } catch (requestError) {
       setError(
         requestError.response?.data?.message ||
-          "Unable to sign in. Please check your credentials and try again."
+        "Unable to sign in. Please check your credentials and try again."
       );
     } finally {
       setSubmitting(false);

@@ -1,0 +1,25 @@
+.razorpay-success-alert {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid #b9dfc5;
+  border-radius: 8px;
+  background: #eefaf2;
+  color: #166534;
+  font-size: 13px;
+}
+
+.razorpay-method-note {
+  display: block;
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.verify-payment-button:disabled,
+.pay-now-button:disabled,
+.payment-method-card button:disabled,
+.payment-method-list button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
