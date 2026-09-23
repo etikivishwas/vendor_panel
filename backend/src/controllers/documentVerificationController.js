@@ -1,4 +1,5 @@
-const fs = require("fs");
+const cloudinary = require("../config/cloudinary");
+
 const { pool } = require("../config/db");
 const {
   createVerificationNotification,
@@ -10,12 +11,7 @@ const documentDefinitions = [
   { field: "identityProof", type: "identity_proof", label: "Other Identity Proof" },
 ];
 
-const removeFile = (file) => {
-  if (!file?.path) return;
-  fs.unlink(file.path, () => { });
-};
 
-const removeFiles = (files = []) => files.forEach(removeFile);
 
 const findVendorId = async (connection, accountId) => {
   const [rows] = await connection.execute(
@@ -97,7 +93,7 @@ const getDocumentVerification = async (req, res, next) => {
 };
 
 const submitDocumentVerification = async (req, res, next) => {
-  const uploadedFiles = Object.values(req.files || {}).flat();
+  
   let connection;
   let transactionStarted = false;
 
@@ -134,33 +130,55 @@ const submitDocumentVerification = async (req, res, next) => {
         throw error;
       }
 
-      if (file) {
-        const fileUrl = `/uploads/vendor-documents/${file.filename}`;
-        await connection.execute(
-          `INSERT INTO vendor_verification_documents
-             (vendor_id, document_type, original_file_name, stored_file_name,
-              file_url, mime_type, file_size, vendor_remarks, review_status)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')
-           ON DUPLICATE KEY UPDATE
-             original_file_name = VALUES(original_file_name),
-             stored_file_name = VALUES(stored_file_name),
-             file_url = VALUES(file_url),
-             mime_type = VALUES(mime_type),
-             file_size = VALUES(file_size),
-             vendor_remarks = VALUES(vendor_remarks),
-             review_status = 'pending', reviewer_remarks = NULL, reviewed_at = NULL`,
-          [
-            vendorId,
-            definition.type,
-            file.originalname,
-            file.filename,
-            fileUrl,
-            file.mimetype,
-            file.size,
-            remarks[definition.type] || null,
-          ]
-        );
+     if (file) {
+  const cloudinaryResult = await new Promise((resolve, reject) => {
+  const stream = cloudinary.uploader.upload_stream(
+    {
+      folder: "milieu/vendor-documents",
+      resource_type: "image",
+      use_filename: true,
+      unique_filename: true,
+    },
+    (error, result) => {
+      if (error) {
+        reject(error);
       } else {
+        resolve(result);
+      }
+    }
+  );
+
+  stream.end(file.buffer);
+});
+
+const fileUrl = cloudinaryResult.secure_url;
+const storedFileName = cloudinaryResult.public_id;
+
+  await connection.execute(
+    `INSERT INTO vendor_verification_documents
+       (vendor_id, document_type, original_file_name, stored_file_name,
+        file_url, mime_type, file_size, vendor_remarks, review_status)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending')
+     ON DUPLICATE KEY UPDATE
+       original_file_name = VALUES(original_file_name),
+       stored_file_name = VALUES(stored_file_name),
+       file_url = VALUES(file_url),
+       mime_type = VALUES(mime_type),
+       file_size = VALUES(file_size),
+       vendor_remarks = VALUES(vendor_remarks),
+       review_status = 'pending', reviewer_remarks = NULL, reviewed_at = NULL`,
+    [
+      vendorId,
+      definition.type,
+      file.originalname,
+      storedFileName,
+      fileUrl,
+      file.mimetype,
+      file.size,
+      remarks[definition.type] || null,
+    ]
+  );
+} else {
         await connection.execute(
           `UPDATE vendor_verification_documents
            SET vendor_remarks = ?, review_status = 'pending',
@@ -220,12 +238,13 @@ const submitDocumentVerification = async (req, res, next) => {
     });
   } catch (error) {
     if (connection && transactionStarted) await connection.rollback();
-    removeFiles(uploadedFiles);
+    
     next(error);
   } finally {
     if (connection) connection.release();
   }
 };
+
 
 module.exports = {
   getDocumentVerification,
