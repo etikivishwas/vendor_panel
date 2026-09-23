@@ -1,6 +1,6 @@
-const fs = require("fs");
-const path = require("path");
+
 const { pool } = require("../config/db");
+const cloudinary = require("../config/cloudinary");
 
 const normalizeNullableText = (value) => {
   if (value === undefined || value === null) {
@@ -12,47 +12,9 @@ const normalizeNullableText = (value) => {
   return normalizedValue || null;
 };
 
-const removeUploadedFile = (file) => {
-  if (!file || !file.path) {
-    return;
-  }
 
-  fs.unlink(file.path, (error) => {
-    if (error && error.code !== "ENOENT") {
-      console.error(
-        "Unable to remove uploaded file:",
-        error.message
-      );
-    }
-  });
-};
 
-const removeOldLocalLogo = (imageUrl) => {
-  if (
-    !imageUrl ||
-    !imageUrl.startsWith("/uploads/vendor-logos/")
-  ) {
-    return;
-  }
 
-  const filename = path.basename(imageUrl);
-
-  const fullPath = path.join(
-    process.cwd(),
-    "uploads",
-    "vendor-logos",
-    filename
-  );
-
-  fs.unlink(fullPath, (error) => {
-    if (error && error.code !== "ENOENT") {
-      console.error(
-        "Unable to remove old logo:",
-        error.message
-      );
-    }
-  });
-};
 
 const getAuthenticatedVendorId = async (
   connection,
@@ -250,7 +212,7 @@ const updateVendorProfile = async (req, res, next) => {
     );
 
     if (!businessName) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -259,7 +221,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (businessName.length > 150) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -272,7 +234,7 @@ const updateVendorProfile = async (req, res, next) => {
       !Number.isInteger(categoryId) ||
       categoryId <= 0
     ) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -281,7 +243,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (!phone) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -290,7 +252,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (phone.length > 20) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -300,7 +262,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (whatsapp.length > 20) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -310,7 +272,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (!address) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -319,7 +281,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (address.length > 255) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -329,7 +291,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (!city) {
-      removeUploadedFile(req.file);
+     
 
       return res.status(400).json({
         success: false,
@@ -338,7 +300,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (city.length > 100) {
-      removeUploadedFile(req.file);
+     
 
       return res.status(400).json({
         success: false,
@@ -347,7 +309,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (!postalCode) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -356,7 +318,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (postalCode.length > 20) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -366,7 +328,7 @@ const updateVendorProfile = async (req, res, next) => {
     }
 
     if (description && description.length > 255) {
-      removeUploadedFile(req.file);
+      
 
       return res.status(400).json({
         success: false,
@@ -430,9 +392,31 @@ const updateVendorProfile = async (req, res, next) => {
 
     previousImageUrl = vendorRows[0].image_url || null;
 
-    const newImageUrl = req.file
-      ? `/uploads/vendor-logos/${req.file.filename}`
-      : previousImageUrl;
+    let newImageUrl = previousImageUrl;
+
+if (req.file) {
+  const cloudinaryResult = await new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "milieu/vendor-logos",
+        resource_type: "image",
+        use_filename: true,
+        unique_filename: true,
+      },
+      (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      }
+    );
+
+    stream.end(req.file.buffer);
+  });
+
+  newImageUrl = cloudinaryResult.secure_url;
+}
 
     const [updateResult] = await connection.execute(
       `
@@ -487,13 +471,7 @@ const updateVendorProfile = async (req, res, next) => {
     await connection.commit();
     transactionStarted = false;
 
-    if (
-      req.file &&
-      previousImageUrl &&
-      previousImageUrl !== newImageUrl
-    ) {
-      removeOldLocalLogo(previousImageUrl);
-    }
+    
 
     return res.status(200).json({
       success: true,
@@ -526,7 +504,7 @@ const updateVendorProfile = async (req, res, next) => {
       }
     }
 
-    removeUploadedFile(req.file);
+    
     next(error);
   } finally {
     if (connection) {
