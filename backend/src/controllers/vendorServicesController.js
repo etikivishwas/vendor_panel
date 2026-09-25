@@ -1,23 +1,10 @@
-const fs = require("fs");
-const path = require("path");
 const { pool } = require("../config/db");
+const cloudinary = require("../config/cloudinary");
 
 const validStatuses = new Set(["active", "draft", "archived"]);
 const validPricingTypes = new Set(["fixed", "starting_from", "range", "quote"]);
 
-const removeFile = (filePath) => {
-  if (!filePath) return;
-  fs.unlink(filePath, (error) => {
-    if (error && error.code !== "ENOENT") console.error("File cleanup failed:", error.message);
-  });
-};
 
-const removeUploadedFile = (file) => removeFile(file?.path);
-
-const removeLocalImageByUrl = (imageUrl) => {
-  if (!imageUrl?.startsWith("/uploads/service-images/")) return;
-  removeFile(path.join(process.cwd(), "uploads", "service-images", path.basename(imageUrl)));
-};
 
 const getVendorId = async (connection, accountId) => {
   const [rows] = await connection.execute(
@@ -175,7 +162,31 @@ const createVendorService = async (req, res, next) => {
       if (!serviceRows.length) throw Object.assign(new Error("Selected catalog service does not belong to this category"), { status: 400 });
     }
 
-    const imageUrl = req.file ? `/uploads/service-images/${req.file.filename}` : null;
+    let imageUrl = null;
+
+if (req.file) {
+  const cloudinaryResult = await new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "milieu/service-images",
+        resource_type: "image",
+        use_filename: true,
+        unique_filename: true,
+      },
+      (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      }
+    );
+
+    stream.end(req.file.buffer);
+  });
+
+  imageUrl = cloudinaryResult.secure_url;
+}
     const [result] = await connection.execute(
       `INSERT INTO vendor_services
        (vendor_id, service_id, category_id, name, description, pricing_type,
@@ -187,7 +198,7 @@ const createVendorService = async (req, res, next) => {
 
     return res.status(201).json({ success: true, message: "Service created successfully", data: { id: Number(result.insertId) } });
   } catch (error) {
-    removeUploadedFile(req.file);
+    
     next(error);
   } finally {
     if (connection) connection.release();
@@ -215,7 +226,31 @@ const updateVendorService = async (req, res, next) => {
     if (!existingRows.length) throw Object.assign(new Error("Service not found"), { status: 404 });
     oldImageUrl = existingRows[0].image_url;
 
-    const imageUrl = req.file ? `/uploads/service-images/${req.file.filename}` : oldImageUrl;
+    let imageUrl = oldImageUrl;
+
+if (req.file) {
+  const cloudinaryResult = await new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      {
+        folder: "milieu/service-images",
+        resource_type: "image",
+        use_filename: true,
+        unique_filename: true,
+      },
+      (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      }
+    );
+
+    stream.end(req.file.buffer);
+  });
+
+  imageUrl = cloudinaryResult.secure_url;
+}
     await connection.execute(
       `UPDATE vendor_services SET service_id = ?, category_id = ?, name = ?,
        description = ?, pricing_type = ?, price_min = ?, price_max = ?,
@@ -227,12 +262,12 @@ const updateVendorService = async (req, res, next) => {
 
     await connection.commit();
     transactionStarted = false;
-    if (req.file && oldImageUrl && oldImageUrl !== imageUrl) removeLocalImageByUrl(oldImageUrl);
+    
 
     return res.json({ success: true, message: "Service updated successfully" });
   } catch (error) {
     if (connection && transactionStarted) await connection.rollback();
-    removeUploadedFile(req.file);
+   
     next(error);
   } finally {
     if (connection) connection.release();

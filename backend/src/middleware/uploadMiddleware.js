@@ -1,16 +1,5 @@
-const fs = require("fs");
 const path = require("path");
 const multer = require("multer");
-
-const uploadDirectory = path.join(
-  process.cwd(),
-  "uploads",
-  "vendor-logos"
-);
-
-fs.mkdirSync(uploadDirectory, {
-  recursive: true,
-});
 
 const allowedMimeTypes = new Set([
   "image/jpeg",
@@ -25,31 +14,7 @@ const allowedExtensions = new Set([
   ".webp",
 ]);
 
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, uploadDirectory);
-  },
-
-  filename: (req, file, callback) => {
-    const originalExtension = path
-      .extname(file.originalname)
-      .toLowerCase();
-
-    const extension = allowedExtensions.has(originalExtension)
-      ? originalExtension
-      : ".jpg";
-
-    const vendorAccountId = req.vendor?.id || "unknown";
-
-    const safeFilename = [
-      "vendor",
-      vendorAccountId,
-      Date.now(),
-    ].join("-");
-
-    callback(null, `${safeFilename}${extension}`);
-  },
-});
+const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, callback) => {
   const extension = path
