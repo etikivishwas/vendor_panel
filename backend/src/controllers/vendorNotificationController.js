@@ -43,7 +43,7 @@ const getNotifications = async (req, res, next) => {
   try {
     const limit = Math.min(Math.max(Number(req.query.limit) || 12, 1), 30);
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     /* This makes approval/rejection notifications robust even when the admin
        workflow was implemented before the notification feature. */
@@ -93,7 +93,7 @@ const markNotificationRead = async (req, res, next) => {
     }
 
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     const [result] = await connection.execute(
       `UPDATE vendor_panel_notifications
@@ -122,7 +122,7 @@ const markAllNotificationsRead = async (req, res, next) => {
 
   try {
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     await connection.execute(
       `UPDATE vendor_panel_notifications

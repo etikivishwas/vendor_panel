@@ -62,7 +62,7 @@ const getVendorProfile = async (req, res, next) => {
 
     const vendorId = await getAuthenticatedVendorId(
       connection,
-      req.vendor.id
+      req.vendor.accountId
     );
 
     const [vendorRows] = await connection.execute(
@@ -100,7 +100,7 @@ const getVendorProfile = async (req, res, next) => {
           AND vpa.id = ?
         LIMIT 1
       `,
-      [vendorId, req.vendor.id]
+      [vendorId, req.vendor.accountId]
     );
 
     if (!vendorRows.length) {
@@ -344,7 +344,7 @@ const updateVendorProfile = async (req, res, next) => {
 
     const vendorId = await getAuthenticatedVendorId(
       connection,
-      req.vendor.id
+      req.vendor.accountId
     );
 
     const [categoryRows] = await connection.execute(
@@ -465,7 +465,7 @@ if (req.file) {
         SET business_name = ?
         WHERE id = ?
       `,
-      [businessName, req.vendor.id]
+      [businessName, req.vendor.accountId]
     );
 
     await connection.commit();
