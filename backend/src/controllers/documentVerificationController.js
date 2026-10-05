@@ -39,7 +39,7 @@ const getDocumentVerification = async (req, res, next) => {
   let connection;
   try {
     connection = await pool.getConnection();
-    const vendorId = await findVendorId(connection, req.vendor.id);
+    const vendorId = await findVendorId(connection, req.vendor.accountId);
 
     const [submissionRows] = await connection.execute(
       `SELECT status, submitted_at, reviewed_at, reviewer_remarks
@@ -102,7 +102,7 @@ const submitDocumentVerification = async (req, res, next) => {
     await connection.beginTransaction();
     transactionStarted = true;
 
-    const vendorId = await findVendorId(connection, req.vendor.id);
+    const vendorId = await findVendorId(connection, req.vendor.accountId);
 
     const [existingRows] = await connection.execute(
       `SELECT document_type FROM vendor_verification_documents WHERE vendor_id = ?`,

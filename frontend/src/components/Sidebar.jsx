@@ -37,11 +37,7 @@ const menuItems = [
     icon: CreditCard,
     path: "/subscriptions",
   },
-  {
-    label: "Settings",
-    icon: Settings,
-    path: "/settings",
-  },
+  
 ];
 
 function Sidebar() {

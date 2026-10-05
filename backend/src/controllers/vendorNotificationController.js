@@ -42,7 +42,11 @@ const getNotifications = async (req, res, next) => {
 
   try {
     const limit = Math.min(Math.max(Number(req.query.limit) || 12, 1), 30);
+
     connection = await pool.getConnection();
+    console.log("=== PROFILE AUTH ===");
+    console.log("req.vendor:", req.vendor);
+    console.log("req.vendor.accountId:", req.vendor?.accountId);
     const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     /* This makes approval/rejection notifications robust even when the admin

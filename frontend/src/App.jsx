@@ -17,6 +17,7 @@ import SubscriptionsPage from "./pages/SubscriptionsPage.jsx";
 import SubscriptionCheckoutPage from "./pages/SubscriptionCheckoutPage.jsx"
 import ApplicationReviewPage from "./pages/ApplicationReviewPage.jsx";
 import VerificationPaymentPage from "./pages/VerificationPaymentPage.jsx";
+import SetupPasswordPage from "./pages/SetupPasswordPage.jsx";
 
 function ProtectedRoute({
   children,
@@ -60,10 +61,16 @@ function PlaceholderPage({
 function App() {
   return (
     <Routes>
+
+      
       <Route
         path="/login"
         element={<LoginPage />}
       />
+      <Route
+  path="/vendor/setup-password"
+  element={<SetupPasswordPage />}
+/>
 
       <Route
         path="/dashboard"

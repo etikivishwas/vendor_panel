@@ -33,7 +33,7 @@ const getSubscriptions = async (req, res, next) => {
   let connection;
   try {
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
     const planRows = await getCanonicalPlans(connection);
     const planIds = planRows.map((row) => Number(row.id));
     let featureRows = [];
@@ -124,7 +124,7 @@ const createCheckout = async (req, res, next) => {
     }
 
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     const [requestedRows] = await connection.execute(
       `SELECT id, name FROM subscription_plans
@@ -192,7 +192,7 @@ const getCheckout = async (req, res, next) => {
   let connection;
   try {
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
     const token = String(req.params.token || "").trim();
 
     const [rows] = await connection.execute(
@@ -250,7 +250,7 @@ const updatePaymentMethod = async (req, res, next) => {
       return res.status(400).json({ success: false, message: "Invalid payment method" });
     }
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
     const [result] = await connection.execute(
       `UPDATE vendor_subscription_checkouts
        SET payment_method = ?

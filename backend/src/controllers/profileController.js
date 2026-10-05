@@ -55,11 +55,14 @@ const getAuthenticatedVendorId = async (
 };
 
 const getVendorProfile = async (req, res, next) => {
+  
   let connection;
 
   try {
     connection = await pool.getConnection();
-
+    console.log("=== PROFILE AUTH ===");
+    console.log("req.vendor:", req.vendor);
+    console.log("req.vendor.accountId:", req.vendor?.accountId);
     const vendorId = await getAuthenticatedVendorId(
       connection,
       req.vendor.accountId

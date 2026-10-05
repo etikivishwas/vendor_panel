@@ -75,7 +75,7 @@ const getVendorServices = async (req, res, next) => {
   let connection;
   try {
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
     const status = String(req.query.status || "all");
     const search = String(req.query.search || "").trim();
 
@@ -146,7 +146,7 @@ const createVendorService = async (req, res, next) => {
   try {
     const payload = validatePayload(req.body);
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     const [categoryRows] = await connection.execute(
       `SELECT id FROM service_categories WHERE id = ? AND is_active = 1 LIMIT 1`,
@@ -217,7 +217,7 @@ const updateVendorService = async (req, res, next) => {
     connection = await pool.getConnection();
     await connection.beginTransaction();
     transactionStarted = true;
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     const [existingRows] = await connection.execute(
       `SELECT image_url FROM vendor_services WHERE id = ? AND vendor_id = ? LIMIT 1 FOR UPDATE`,
@@ -282,7 +282,7 @@ const changeServiceStatus = async (req, res, next) => {
 
     const connection = await pool.getConnection();
     try {
-      const vendorId = await getVendorId(connection, req.vendor.id);
+      const vendorId = await getVendorId(connection, req.vendor.accountId);
       const [result] = await connection.execute(
         `UPDATE vendor_services SET status = ? WHERE id = ? AND vendor_id = ?`,
         [status, id, vendorId]
