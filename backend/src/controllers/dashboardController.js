@@ -3,6 +3,7 @@ const { pool } = require("../config/db");
 const getDashboard = async (req, res, next) => {
   try {
     const vendorId = req.vendor.id;
+const accountId = req.vendor.accountId;
 
     const [
       vendorResult,
@@ -26,7 +27,7 @@ const getDashboard = async (req, res, next) => {
           WHERE id = ?
           LIMIT 1
         `,
-        [vendorId]
+        [accountId]
       ),
 
       pool.execute(

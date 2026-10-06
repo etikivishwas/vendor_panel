@@ -66,6 +66,12 @@ function ServicesPage() {
   const [openMenuId, setOpenMenuId] = useState(null);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+  const getImageUrl = (imageUrl) => {
+  if (!imageUrl) return "";
+  return imageUrl.startsWith("http")
+    ? imageUrl
+    : `${backendUrl}${imageUrl}`;
+};
   const vendor = useMemo(() => {
     try { return JSON.parse(localStorage.getItem("vendor") || "{}"); }
     catch { return {}; }
@@ -135,7 +141,7 @@ function ServicesPage() {
       status: service.status,
     });
     setImage(null);
-    setImagePreview(service.imageUrl ? `${backendUrl}${service.imageUrl}` : "");
+    setImagePreview(getImageUrl(service.imageUrl));
     setOpenMenuId(null);
     setModalOpen(true);
   };
@@ -266,7 +272,7 @@ function ServicesPage() {
                 <article className="service-card" key={service.id}>
                   <div className="service-card-image">
                     {service.imageUrl ? (
-                      <img src={`${backendUrl}${service.imageUrl}`} alt="" />
+                      <img src={getImageUrl(service.imageUrl)} alt="" />
                     ) : (
                       <div className="service-image-placeholder"><ImagePlus size={30} /></div>
                     )}
