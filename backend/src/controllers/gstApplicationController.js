@@ -186,7 +186,7 @@ const getGstApplication = async (req, res, next) => {
   let connection;
   try {
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     const [applicationRows] = await connection.execute(
       `SELECT * FROM vendor_gst_applications WHERE vendor_id = ? LIMIT 1`,
@@ -205,7 +205,7 @@ const getGstApplication = async (req, res, next) => {
        FROM vendors v
        INNER JOIN vendor_panel_accounts vpa ON vpa.existing_vendor_id = v.id
        WHERE v.id = ? AND vpa.id = ? LIMIT 1`,
-      [vendorId, req.vendor.id]
+      [vendorId, req.vendor.accountId]
     );
 
     const profile = profileRows[0] || {};
@@ -296,7 +296,7 @@ const saveGstStep = async (req, res, next) => {
     if (step <= 3) validateStep(payload, step);
 
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
     const nextStep = Math.min(step + 1, 4);
     await upsertApplication(connection, vendorId, payload, nextStep, "draft", null);
 
@@ -320,7 +320,7 @@ const saveGstDraft = async (req, res, next) => {
     const currentStep = Math.min(Math.max(Number(req.body.currentStep) || 1, 1), 4);
 
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
     await upsertApplication(connection, vendorId, payload, currentStep, "draft", null);
 
     return res.json({ success: true, message: "GST application draft saved", data: { currentStep } });
@@ -345,7 +345,7 @@ const submitGstApplication = async (req, res, next) => {
     }
 
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
     await upsertApplication(connection, vendorId, payload, 4, "submitted", new Date());
 
     return res.json({

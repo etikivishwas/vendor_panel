@@ -195,7 +195,7 @@ const getLabourApplication = async (req, res, next) => {
 
   try {
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     const [applicationRows] = await connection.execute(
       `SELECT * FROM vendor_labour_applications
@@ -217,7 +217,7 @@ const getLabourApplication = async (req, res, next) => {
          ON vpa.existing_vendor_id = v.id
        WHERE v.id = ? AND vpa.id = ?
        LIMIT 1`,
-      [vendorId, req.vendor.id]
+      [vendorId, req.vendor.accountId]
     );
 
     const profile = profileRows[0] || {};
@@ -253,7 +253,7 @@ const saveApplication = async (req, res, next, finalSubmission) => {
   try {
     const payload = parsePayload(req.body, finalSubmission);
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
     const status = finalSubmission ? "submitted" : "draft";
 
     await connection.execute(

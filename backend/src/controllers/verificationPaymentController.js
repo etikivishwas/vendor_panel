@@ -46,7 +46,7 @@ const getVerificationPayment = async (req, res, next) => {
 
   try {
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection,req.vendor.accountId);
     const token = String(req.params.token || "").trim();
 
     const [rows] = await connection.execute(
@@ -137,7 +137,7 @@ const updateVerificationPayment = async (req, res, next) => {
     await connection.beginTransaction();
     transactionStarted = true;
 
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
     const token = String(req.params.token || "").trim();
 
     const [sessionRows] = await connection.execute(
