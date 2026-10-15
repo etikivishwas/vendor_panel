@@ -49,7 +49,7 @@ const razorpayPaymentRoutes = require(
 );
 
 const app = express();
-const port = Number(process.env.PORT) || 5000;
+const port = Number(process.env.PORT) || 7000;
 
 app.use(
   helmet({

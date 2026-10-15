@@ -47,7 +47,7 @@ const getApplicationReview = async (req, res, next) => {
 
   try {
     connection = await pool.getConnection();
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection, req.vendor.accountId);
 
     const [submissionRows] = await connection.execute(
       `SELECT id, status, submitted_at, reviewed_at, reviewer_remarks
@@ -81,7 +81,7 @@ const getApplicationReview = async (req, res, next) => {
          ON vpa.existing_vendor_id = v.id
        WHERE v.id = ? AND vpa.id = ?
        LIMIT 1`,
-      [vendorId, req.vendor.id]
+      [vendorId, req.vendor.accountId]
     );
 
     const [documentRows] = await connection.execute(
@@ -174,7 +174,7 @@ const createVerificationPaymentSession = async (req, res, next) => {
     await connection.beginTransaction();
     transactionStarted = true;
 
-    const vendorId = await getVendorId(connection, req.vendor.id);
+    const vendorId = await getVendorId(connection,req.vendor.accountId);
 
     const [submissionRows] = await connection.execute(
       `SELECT id, status

@@ -65,7 +65,7 @@ function ServicesPage() {
   const [success, setSuccess] = useState("");
   const [openMenuId, setOpenMenuId] = useState(null);
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:7000";
   const getImageUrl = (imageUrl) => {
   if (!imageUrl) return "";
   return imageUrl.startsWith("http")
