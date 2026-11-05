@@ -212,7 +212,7 @@ const startServer = async () => {
   try {
     await testConnection();
 
-    app.listen(port, () => {
+    app.listen(port, "127.0.0.1", () => {
       console.log(
         `Vendor API running on http://localhost:${port}`
       );

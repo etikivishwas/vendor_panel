@@ -50,8 +50,7 @@ function ProfilePage() {
   const [success, setSuccess] = useState("");
 
   const backendUrl =
-    import.meta.env.VITE_BACKEND_URL ||
-    "http://localhost:7000";
+    import.meta.env.VITE_BACKEND_URL ?? "";
 
   const displayImageUrl = useMemo(() => {
     if (logoPreview) {
