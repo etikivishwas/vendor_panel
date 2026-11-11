@@ -47,6 +47,12 @@ const razorpayWebhookRoutes = require(
 const razorpayPaymentRoutes = require(
   "./src/routes/razorpayPaymentRoutes.js"
 );
+const vendorRegistrationRoutes = require(
+  "./src/routes/vendorRegistrationRoutes"
+);
+const vendorPasswordResetRoutes = require(
+  "./src/routes/vendorPasswordResetRoutes"
+);
 
 const app = express();
 const port = Number(process.env.PORT) || 7000;
@@ -126,8 +132,25 @@ app.get("/api/health", async (req, res, next) => {
   }
 });
 
-app.use("/api/vendor/auth", authRoutes);
-app.use("/api/vendor/dashboard", dashboardRoutes);
+app.use(
+  "/api/vendor/auth",
+  authRoutes
+);
+
+app.use(
+  "/api/vendor/password-reset",
+  vendorPasswordResetRoutes
+);
+
+app.use(
+  "/api/vendor/register-interest",
+  vendorRegistrationRoutes
+);
+
+app.use(
+  "/api/vendor/dashboard",
+  dashboardRoutes
+);
 app.use("/api/vendor/profile", profileRoutes);
 app.use(
   "/api/vendor/document-verification",

@@ -18,6 +18,13 @@ import SubscriptionCheckoutPage from "./pages/SubscriptionCheckoutPage.jsx"
 import ApplicationReviewPage from "./pages/ApplicationReviewPage.jsx";
 import VerificationPaymentPage from "./pages/VerificationPaymentPage.jsx";
 import SetupPasswordPage from "./pages/SetupPasswordPage.jsx";
+import VendorRegistrationPage from
+  "./pages/VendorRegistrationPage.jsx";
+import ForgotPasswordPage from
+  "./pages/ForgotPasswordPage.jsx";
+
+import ResetPasswordPage from
+  "./pages/ResetPasswordPage.jsx";
 
 function ProtectedRoute({
   children,
@@ -62,15 +69,30 @@ function App() {
   return (
     <Routes>
 
-      
+
       <Route
         path="/login"
         element={<LoginPage />}
       />
+
       <Route
-  path="/vendor/setup-password"
-  element={<SetupPasswordPage />}
-/>
+        path="/forgot-password"
+        element={<ForgotPasswordPage />}
+      />
+
+      <Route
+        path="/reset-password"
+        element={<ResetPasswordPage />}
+      />
+
+      <Route
+        path="/register-interest"
+        element={<VendorRegistrationPage />}
+      />
+      <Route
+        path="/vendor/setup-password"
+        element={<SetupPasswordPage />}
+      />
 
       <Route
         path="/dashboard"
