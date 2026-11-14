@@ -1,15 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+    --sub-primary: #0F766E;
+    --sub-primary-dark: #0B5F59;
+    --sub-primary-soft: #DCEFEB;
+    --sub-accent: #FF8A4C;
+    --sub-accent-dark: #E96F32;
+    --sub-accent-soft: #FFF0E8;
+    --sub-text: #18323B;
+    --sub-white: #FFFFFF;
+    --sub-surface: #F0F7F6;
+    --sub-muted: #64777D;
+    --sub-line: #D8E7E4;
+    --sub-danger: #B23547;
+    --sub-danger-soft: #FFF2F4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+button {
+    font: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 138, 76, .24);
+}
+
 .subscriptions-content {
     width: calc(100% - 48px);
     max-width: 1480px;
     min-height: calc(100vh - 58px);
     margin: 0 auto;
-    padding: 32px 0 60px
+    padding: 32px 0 60px;
+    color: var(--sub-text);
+    font-family: "Inter", sans-serif;
 }
 
 .subscriptions-heading {
     max-width: 760px;
     margin: 0 auto 28px;
-    text-align: center
+    text-align: center;
 }
 
 .subscriptions-heading>span {
@@ -17,25 +51,29 @@
     align-items: center;
     gap: 8px;
     margin-bottom: 9px;
-    color: #08724c;
+    color: var(--sub-primary);
     font-size: 12px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: .7px
+    letter-spacing: .7px;
+}
+
+.subscriptions-heading>span svg {
+    color: var(--sub-accent);
 }
 
 .subscriptions-heading h1 {
     margin: 0 0 10px;
-    color: #10283b;
+    color: var(--sub-text);
     font-size: 36px;
-    letter-spacing: -.9px
+    letter-spacing: -.9px;
 }
 
 .subscriptions-heading p {
     margin: 0;
-    color: #65737f;
+    color: var(--sub-muted);
     font-size: 15px;
-    line-height: 1.55
+    line-height: 1.55;
 }
 
 .current-plan-banner {
@@ -45,11 +83,11 @@
     max-width: 760px;
     margin: 0 auto 22px;
     padding: 17px 20px;
-    border: 2px solid #078254;
-    border-radius: 12px;
-    color: #0c6944;
-    background: linear-gradient(135deg, #e8fbf1, #f7fffa);
-    box-shadow: 0 6px 18px rgba(8, 129, 82, .1)
+    color: var(--sub-primary-dark);
+    background: linear-gradient(135deg, var(--sub-primary-soft), #F8FFFC);
+    border: 2px solid var(--sub-primary);
+    border-radius: 13px;
+    box-shadow: 0 7px 20px rgba(15, 118, 110, .12);
 }
 
 .current-plan-icon {
@@ -57,46 +95,46 @@
     height: 43px;
     display: grid;
     place-items: center;
-    border-radius: 50%;
     color: #fff;
-    background: #078254
+    background: var(--sub-primary);
+    border-radius: 50%;
 }
 
 .current-plan-banner small,
 .current-plan-banner strong,
 .current-plan-banner span {
-    display: block
+    display: block;
 }
 
 .current-plan-banner small {
     font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: .6px
+    letter-spacing: .6px;
 }
 
 .current-plan-banner strong {
     margin: 2px 0;
-    color: #094c34;
-    font-size: 18px
+    color: var(--sub-text);
+    font-size: 18px;
 }
 
 .current-plan-banner span {
-    color: #587268;
-    font-size: 12px
+    color: var(--sub-muted);
+    font-size: 12px;
 }
 
 .plans-table-shell {
     overflow-x: auto;
-    border: 1px solid #ccd7e0;
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: 0 8px 24px rgba(23, 48, 66, .07)
+    background: var(--sub-white);
+    border: 1px solid var(--sub-line);
+    border-radius: 13px;
+    box-shadow: 0 8px 24px rgba(24, 50, 59, .07);
 }
 
 .plans-comparison-grid {
     display: grid;
-    min-width: 1200px
+    min-width: 1200px;
 }
 
 .feature-heading,
@@ -106,8 +144,8 @@
 .select-row-label,
 .plan-select-cell {
     min-width: 0;
-    border-right: 1px solid #dfe6ec;
-    border-bottom: 1px solid #dfe6ec
+    border-right: 1px solid var(--sub-line);
+    border-bottom: 1px solid var(--sub-line);
 }
 
 .feature-heading,
@@ -116,70 +154,70 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 18px 16px
+    padding: 18px 16px;
 }
 
 .feature-heading {
-    color: #233b4b;
+    color: var(--sub-text);
     font-size: 17px;
-    font-weight: 800
+    font-weight: 800;
 }
 
 .plan-heading {
     position: relative;
     align-items: center;
-    text-align: center
+    text-align: center;
 }
 
 .plan-heading strong {
-    color: #1c3546;
-    font-size: 17px
+    color: var(--sub-text);
+    font-size: 17px;
 }
 
 .plan-heading div {
-    margin-top: 8px
+    margin-top: 8px;
 }
 
 .plan-heading b {
-    color: #10283b;
-    font-size: 22px
+    color: var(--sub-text);
+    font-size: 22px;
 }
 
 .plan-heading small {
     margin-left: 2px;
-    color: #71808b;
-    font-size: 11px
+    color: var(--sub-muted);
+    font-size: 11px;
 }
 
 .plan-heading em {
     margin-top: 7px;
-    color: #08724c;
+    color: var(--sub-primary);
     font-size: 10px;
     font-style: normal;
     font-weight: 800;
-    text-transform: uppercase
+    text-transform: uppercase;
 }
 
 .plan-heading.featured,
 .feature-value.featured,
 .plan-select-cell.featured {
-    background: #eef4ff;
-    border-left: 1px solid #228366;
-    border-right: 1px solid #228366
+    background: var(--sub-accent-soft);
+    border-left: 1px solid var(--sub-accent);
+    border-right: 1px solid var(--sub-accent);
 }
 
 .current-plan-column {
-    background: #e7f8ef !important;
-    border-left: 2px solid #078254 !important;
-    border-right: 2px solid #078254 !important
+    background: var(--sub-primary-soft) !important;
+    border-left: 2px solid var(--sub-primary) !important;
+    border-right: 2px solid var(--sub-primary) !important;
 }
 
 .plan-heading.current-plan-column {
-    box-shadow: inset 0 4px 0 #078254
+    box-shadow: inset 0 4px 0 var(--sub-primary);
 }
 
 .plan-select-cell.current-plan-column {
-    box-shadow: inset 0 -4px 0 #078254
+    box-shadow: inset 0 -4px 0 var(--sub-primary);
 }
 
 .recommended-label,
@@ -190,27 +228,27 @@
     align-items: center;
     gap: 4px;
     padding: 6px 10px;
-    border-radius: 0 0 8px 8px;
     color: #fff;
     font-size: 8px;
     font-weight: 800;
-    text-transform: uppercase
+    text-transform: uppercase;
+    border-radius: 0 0 8px 8px;
 }
 
 .recommended-label {
-    background: #087d58
+    background: var(--sub-accent-dark);
 }
 
 .current-label {
-    background: #078254
+    background: var(--sub-primary);
 }
 
 .plan-heading.featured.current-plan-column .recommended-label {
-    left: 8px
+    left: 8px;
 }
 
 .plan-heading.featured.current-plan-column .current-label {
-    right: 8px
+    right: 8px;
 }
 
 .feature-label,
@@ -218,23 +256,23 @@
     min-height: 78px;
     display: flex;
     align-items: center;
-    padding: 15px 17px
+    padding: 15px 17px;
 }
 
 .feature-label {
-    color: #405564;
+    color: var(--sub-text);
     font-size: 14px;
     font-weight: 650;
-    line-height: 1.4
+    line-height: 1.4;
 }
 
 .feature-value {
     justify-content: center;
-    color: #213a4b;
+    color: var(--sub-text);
     font-size: 14px;
     font-weight: 600;
     text-align: center;
-    line-height: 1.45
+    line-height: 1.45;
 }
 
 .feature-check {
@@ -242,14 +280,14 @@
     height: 25px;
     display: grid;
     place-items: center;
-    border-radius: 50%;
     color: #fff;
-    background: #078254
+    background: var(--sub-primary);
+    border-radius: 50%;
 }
 
 .feature-empty {
-    color: #98a3ab;
-    font-size: 12px
+    color: #8A989F;
+    font-size: 12px;
 }
 
 .select-row-label,
@@ -258,7 +296,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 0
+    border-bottom: 0;
 }
 
 .plan-select-cell button {
@@ -269,47 +307,59 @@
     justify-content: center;
     gap: 7px;
     padding: 0 16px;
-    border: 1px solid #435b6b;
-    border-radius: 6px;
-    color: #213b4c;
-    background: #fff;
+    color: var(--sub-primary-dark);
     font-size: 13px;
-    font-weight: 800
+    font-weight: 800;
+    background: var(--sub-white);
+    border: 1px solid var(--sub-primary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: color .2s, background-color .2s, transform .15s, box-shadow .2s;
+}
+
+.plan-select-cell button:hover:not(:disabled) {
+    background: var(--sub-primary-soft);
+    transform: translateY(-1px);
 }
 
 .plan-select-cell .featured-button {
-    border-color: #08283d;
     color: #fff;
-    background: #08283d
+    background: linear-gradient(145deg, var(--sub-accent-dark), var(--sub-accent));
+    border-color: var(--sub-accent);
+    box-shadow: 0 8px 18px rgba(255, 138, 76, .2);
 }
 
 .plan-select-cell .current-plan-button {
     min-width: 148px;
-    border: 2px solid #078254;
-    color: #08724c;
-    background: #fff;
-    opacity: 1
+    color: var(--sub-primary-dark);
+    background: var(--sub-white);
+    border: 2px solid var(--sub-primary);
+    opacity: 1;
+}
+
+.plan-select-cell button:disabled {
+    cursor: not-allowed;
 }
 
 .sticky-cell {
     position: sticky;
     left: 0;
     z-index: 3;
-    background: #fff
+    background: var(--sub-white);
 }
 
 .subscriptions-alert {
     margin-bottom: 18px;
     padding: 14px 16px;
+    font-size: 13px;
     border: 1px solid;
-    border-radius: 8px;
-    font-size: 13px
+    border-radius: 9px;
 }
 
 .subscriptions-alert.error {
-    border-color: #f0b7b2;
-    color: #a1271d;
-    background: #fff2f1
+    color: var(--sub-danger);
+    background: var(--sub-danger-soft);
+    border-color: #EFC7CE;
 }
 
 .subscriptions-loading {
@@ -318,38 +368,50 @@
     align-items: center;
     justify-content: center;
     gap: 9px;
-    color: #526675
+    color: var(--sub-primary-dark);
+    background: var(--sub-surface);
 }
 
 .subscriptions-spinner {
-    animation: subscription-spin .8s linear infinite
+    animation: subscription-spin .8s linear infinite;
 }
 
 @keyframes subscription-spin {
     to {
-        transform: rotate(360deg)
+        transform: rotate(360deg);
     }
 }
 
 @media(max-width:760px) {
     .subscriptions-content {
         width: calc(100% - 26px);
-        padding-top: 24px
+        padding-top: 24px;
     }
 
     .subscriptions-heading h1 {
-        font-size: 28px
+        font-size: 28px;
     }
 
     .subscriptions-heading p {
-        font-size: 13px
+        font-size: 13px;
     }
 
     .current-plan-banner {
-        align-items: flex-start
+        align-items: flex-start;
     }
 
     .plans-comparison-grid {
-        min-width: 1100px
+        min-width: 1100px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
     }
 }

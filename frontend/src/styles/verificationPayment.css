@@ -1,46 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+    --vpay-primary: #0F766E;
+    --vpay-primary-dark: #0B5F59;
+    --vpay-primary-soft: #DCEFEB;
+    --vpay-accent: #FF8A4C;
+    --vpay-accent-dark: #E96F32;
+    --vpay-accent-soft: #FFF0E8;
+    --vpay-text: #18323B;
+    --vpay-white: #FFFFFF;
+    --vpay-surface: #F0F7F6;
+    --vpay-muted: #64777D;
+    --vpay-line: #D8E7E4;
+    --vpay-danger: #B23547;
+    --vpay-danger-soft: #FFF2F4;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 138, 76, .24);
+}
+
 .verification-payment-content {
     width: calc(100% - 56px);
     max-width: 1120px;
     min-height: calc(100vh - 58px);
     margin: 0 auto;
-    padding: 34px 0 64px
+    padding: 34px 0 64px;
+    color: var(--vpay-text);
+    font-family: "Inter", sans-serif;
 }
 
 .verification-payment-header {
-    margin-bottom: 27px
+    margin-bottom: 27px;
 }
 
 .verification-payment-header h1 {
     margin: 0 0 8px;
-    color: #0d2538;
+    color: var(--vpay-text);
     font-size: 34px;
-    letter-spacing: -.8px
+    letter-spacing: -.8px;
 }
 
 .verification-payment-header p {
     margin: 0;
-    color: #677580;
-    font-size: 14px
+    color: var(--vpay-muted);
+    font-size: 14px;
 }
 
 .verification-payment-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.55fr) minmax(310px, .72fr);
     align-items: start;
-    gap: 23px
+    gap: 23px;
 }
 
 .payment-method-area {
     display: grid;
-    gap: 18px
+    gap: 18px;
 }
 
 .verification-payment-card,
 .verification-order-card {
-    border: 1px solid #d3dce4;
-    border-radius: 10px;
-    background: #fff;
-    box-shadow: 0 4px 16px rgba(26, 48, 64, .05)
+    background: var(--vpay-white);
+    border: 1px solid var(--vpay-line);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(24, 50, 59, .06);
 }
 
 .verification-payment-card>header {
@@ -48,39 +87,51 @@
     align-items: center;
     gap: 9px;
     padding: 20px 22px 7px;
-    color: #173e58
+    color: var(--vpay-primary);
 }
 
 .verification-payment-card h2,
 .verification-order-card h2 {
     margin: 0;
-    color: #172e3e;
-    font-size: 18px
+    color: var(--vpay-text);
+    font-size: 18px;
 }
 
 .payment-method-list {
     display: grid;
     gap: 10px;
-    padding: 13px 22px 22px
+    padding: 13px 22px 22px;
 }
 
 .payment-method-list>button {
+    min-height: 66px;
     display: grid;
     grid-template-columns: 18px minmax(0, 1fr) 22px;
     align-items: center;
     gap: 11px;
-    min-height: 66px;
     padding: 12px 14px;
-    border: 1px solid #ccd5dd;
-    border-radius: 7px;
-    color: #526472;
-    background: #fff;
-    text-align: left
+    color: var(--vpay-muted);
+    text-align: left;
+    background: var(--vpay-white);
+    border: 1px solid var(--vpay-line);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color .2s, background-color .2s, transform .15s;
+}
+
+.payment-method-list>button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    background: #FBFDFD;
+    border-color: #AFD3CD;
 }
 
 .payment-method-list>button.selected {
-    border: 2px solid #153b54;
-    background: #f4f8fb
+    background: var(--vpay-primary-soft);
+    border: 2px solid var(--vpay-primary);
+}
+
+.payment-method-list>button>svg {
+    color: var(--vpay-accent-dark);
 }
 
 .payment-radio {
@@ -88,67 +139,89 @@
     height: 14px;
     display: grid;
     place-items: center;
-    border: 1px solid #a9b5be;
-    border-radius: 50%
+    border: 1px solid #AFC4C1;
+    border-radius: 50%;
 }
 
 .payment-radio>span {
     width: 7px;
     height: 7px;
+    background: var(--vpay-accent);
     border-radius: 50%;
-    background: #092a40
 }
 
 .payment-method-copy strong,
 .payment-method-copy small {
-    display: block
+    display: block;
 }
 
 .payment-method-copy strong {
-    color: #263c4b;
-    font-size: 13px
+    color: var(--vpay-text);
+    font-size: 13px;
 }
 
 .payment-method-copy small {
     margin-top: 4px;
-    color: #74818a;
-    font-size: 10px
+    color: var(--vpay-muted);
+    font-size: 10px;
+}
+
+.payment-method-list>button:disabled {
+    opacity: .65;
+    cursor: not-allowed;
 }
 
 .upi-card {
-    padding-bottom: 20px
+    padding-bottom: 20px;
 }
 
 .upi-entry-row {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 92px;
     gap: 11px;
-    padding: 11px 22px 0
+    padding: 11px 22px 0;
 }
 
 .upi-entry-row input {
     height: 45px;
     padding: 0 13px;
-    border: 1px solid #cbd5dd;
-    border-radius: 6px;
+    color: var(--vpay-text);
+    background: #FBFDFD;
+    border: 1px solid var(--vpay-line);
+    border-radius: 7px;
     outline: 0;
-    background: #f9fafc
+    transition: border-color .2s, box-shadow .2s, background-color .2s;
+}
+
+.upi-entry-row input::placeholder {
+    color: #829398;
 }
 
 .upi-entry-row input:focus {
-    border-color: #173f59;
-    box-shadow: 0 0 0 3px rgba(23, 63, 89, .08)
+    background: #fff;
+    border-color: var(--vpay-accent);
+    box-shadow: 0 0 0 3px rgba(255, 138, 76, .18);
 }
 
 .upi-entry-row button,
 .gateway-card>button {
     height: 45px;
-    border: 0;
-    border-radius: 6px;
     color: #fff;
-    background: #08283d;
     font-size: 12px;
-    font-weight: 800
+    font-weight: 800;
+    background: linear-gradient(145deg, var(--vpay-primary-dark), var(--vpay-primary));
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 7px 16px rgba(15, 118, 110, .18);
+}
+
+.razorpay-method-note {
+    display: block;
+    margin: 11px 22px 0;
+    color: var(--vpay-muted);
+    font-size: 9px;
+    line-height: 1.45;
 }
 
 .gateway-card {
@@ -157,29 +230,29 @@
     align-items: center;
     gap: 13px;
     padding: 22px;
-    color: #17405b
+    color: var(--vpay-primary);
 }
 
 .gateway-card h2 {
-    margin: 0 0 4px
+    margin: 0 0 4px;
 }
 
 .gateway-card p {
     margin: 0;
-    color: #687681;
+    color: var(--vpay-muted);
     font-size: 10px;
-    line-height: 1.45
+    line-height: 1.45;
 }
 
 .verification-order-card {
     position: sticky;
     top: 24px;
-    padding: 23px
+    padding: 23px;
 }
 
 .verification-order-card h2 {
     padding-bottom: 16px;
-    border-bottom: 1px solid #d8e0e6
+    border-bottom: 1px solid var(--vpay-line);
 }
 
 .order-certificate {
@@ -188,24 +261,25 @@
     gap: 10px;
     margin: 17px 0;
     padding: 13px;
-    border-radius: 7px;
-    color: #0c6846;
-    background: #eaf8f1
+    color: var(--vpay-primary-dark);
+    background: var(--vpay-primary-soft);
+    border: 1px solid #BADBD6;
+    border-radius: 8px;
 }
 
 .order-certificate strong,
 .order-certificate small {
-    display: block
+    display: block;
 }
 
 .order-certificate strong {
-    font-size: 12px
+    font-size: 12px;
 }
 
 .order-certificate small {
     margin-top: 3px;
-    color: #61756c;
-    font-size: 9px
+    color: var(--vpay-muted);
+    font-size: 9px;
 }
 
 .order-line,
@@ -214,39 +288,40 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px
+    gap: 15px;
 }
 
 .order-line {
     padding: 8px 0;
-    color: #53636f;
-    font-size: 11px
+    color: var(--vpay-muted);
+    font-size: 11px;
 }
 
 .order-line strong {
-    color: #263c4b
+    color: var(--vpay-text);
 }
 
 .order-subtotal {
     margin-top: 10px;
     padding: 16px 0 8px;
-    border-top: 1px solid #d8e0e6;
-    color: #3f5260;
+    color: var(--vpay-text);
     font-size: 12px;
-    font-weight: 750
+    font-weight: 750;
+    border-top: 1px solid var(--vpay-line);
 }
 
 .order-total {
     margin-top: 11px;
     padding-top: 17px;
-    border-top: 1px solid #d8e0e6;
-    color: #172e3e;
+    color: var(--vpay-text);
     font-size: 16px;
-    font-weight: 800
+    font-weight: 800;
+    border-top: 1px solid var(--vpay-line);
 }
 
 .order-total strong {
-    font-size: 23px
+    color: var(--vpay-primary);
+    font-size: 23px;
 }
 
 .pay-now-button {
@@ -257,17 +332,30 @@
     justify-content: center;
     gap: 8px;
     margin-top: 21px;
-    border: 0;
-    border-radius: 6px;
     color: #fff;
-    background: #08283d;
     font-size: 13px;
-    font-weight: 800
+    font-weight: 800;
+    background: linear-gradient(145deg, var(--vpay-primary-dark), var(--vpay-primary));
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 8px 18px rgba(15, 118, 110, .2);
+    cursor: pointer;
+    transition: transform .15s, box-shadow .2s;
+}
+
+.pay-now-button svg:not(.verification-payment-spinner) {
+    color: #FFD8C4;
+}
+
+.pay-now-button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 11px 22px rgba(15, 118, 110, .27);
 }
 
 .pay-now-button:disabled {
     opacity: .65;
-    cursor: not-allowed
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 .encrypted-note {
@@ -276,29 +364,29 @@
     justify-content: center;
     gap: 5px;
     margin-top: 12px;
-    color: #657580;
+    color: var(--vpay-primary-dark);
     text-align: center;
-    font-size: 9px
+    font-size: 9px;
 }
 
 .verification-payment-alert {
     margin-bottom: 18px;
     padding: 13px 15px;
+    font-size: 12px;
     border: 1px solid;
-    border-radius: 7px;
-    font-size: 12px
+    border-radius: 9px;
 }
 
 .verification-payment-alert.error {
-    border-color: #f0b7b2;
-    color: #a1271d;
-    background: #fff2f1
+    color: var(--vpay-danger);
+    background: var(--vpay-danger-soft);
+    border-color: #EFC7CE;
 }
 
 .verification-payment-alert.success {
-    border-color: #a6dabb;
-    color: #106b3a;
-    background: #edf9f1
+    color: var(--vpay-primary-dark);
+    background: var(--vpay-primary-soft);
+    border-color: #BADBD6;
 }
 
 .verification-payment-loading {
@@ -307,49 +395,61 @@
     align-items: center;
     justify-content: center;
     gap: 9px;
-    color: #526675
+    color: var(--vpay-primary-dark);
+    background: var(--vpay-surface);
 }
 
 .verification-payment-spinner {
-    animation: verification-payment-spin .8s linear infinite
+    animation: verification-payment-spin .8s linear infinite;
 }
 
 @keyframes verification-payment-spin {
     to {
-        transform: rotate(360deg)
+        transform: rotate(360deg);
     }
 }
 
 @media(max-width:900px) {
     .verification-payment-layout {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .verification-order-card {
         position: static;
-        order: -1
+        order: -1;
     }
 }
 
 @media(max-width:620px) {
     .verification-payment-content {
         width: calc(100% - 28px);
-        padding-top: 25px
+        padding-top: 25px;
     }
 
     .verification-payment-header h1 {
-        font-size: 28px
+        font-size: 28px;
     }
 
     .upi-entry-row {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .gateway-card {
-        grid-template-columns: 35px minmax(0, 1fr)
+        grid-template-columns: 35px minmax(0, 1fr);
     }
 
     .gateway-card>button {
-        grid-column: 1/-1
+        grid-column: 1 / -1;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
     }
 }
