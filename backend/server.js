@@ -53,6 +53,9 @@ const vendorRegistrationRoutes = require(
 const vendorPasswordResetRoutes = require(
   "./src/routes/vendorPasswordResetRoutes"
 );
+const vendorReviewRoutes = require(
+  "./src/routes/vendorReviewRoutes"
+);
 
 const app = express();
 const port = Number(process.env.PORT) || 7000;
@@ -184,6 +187,10 @@ app.use(
 app.use(
   "/api/vendor/verification-payment",
   verificationPaymentRoutes
+);
+app.use(
+  "/api/vendor",
+  vendorReviewRoutes
 );
 app.use("/api/razorpay", razorpayPaymentRoutes);
 

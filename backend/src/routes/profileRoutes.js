@@ -6,6 +6,10 @@ const {
 } = require("../controllers/profileController");
 
 const {
+  reverseGeocodeVendorLocation,
+} = require("../controllers/locationController");
+
+const {
   authenticateVendor,
 } = require("../middleware/authMiddleware");
 
@@ -26,6 +30,12 @@ router.put(
   authenticateVendor,
   uploadVendorLogo.single("logo"),
   updateVendorProfile
+);
+
+router.get(
+  "/reverse-geocode",
+  authenticateVendor,
+  reverseGeocodeVendorLocation
 );
 
 module.exports = router;
