@@ -4,8 +4,10 @@ import {
   ChevronDown,
   Clock3,
   FileCheck2,
+  HelpCircle,
   LogOut,
-  Mail,
+  MessageCircle,
+  Phone,
   Search,
   ShieldCheck,
   UserRound,
@@ -19,6 +21,12 @@ import {
 } from "../api/notificationApi";
 import "../styles/topbarNotifications.css";
 import "../styles/topbarVendorMenu.css";
+
+const ADMIN_PHONE_NUMBER = "919876543210";
+const ADMIN_DISPLAY_NUMBER = "+91 98765 43210";
+
+const ADMIN_WHATSAPP_MESSAGE =
+  "Hello Admin, I am a vendor and need help with the Tedo Bizz vendor portal.";
 
 const notificationIcon = (type) => {
   if (type === "verification_approved") return ShieldCheck;
@@ -45,6 +53,7 @@ const timeAgo = (dateValue) => {
 function Topbar({ vendor }) {
   const navigate = useNavigate();
   const notificationRef = useRef(null);
+  const helpMenuRef = useRef(null);
   const vendorMenuRef = useRef(null);
 
   const [notifications, setNotifications] = useState([]);
@@ -53,6 +62,7 @@ function Topbar({ vendor }) {
   const [vendorMenuOpen, setVendorMenuOpen] = useState(false);
   const [notificationsLoading, setNotificationsLoading] = useState(true);
   const [notificationError, setNotificationError] = useState("");
+  const [helpMenuOpen, setHelpMenuOpen] = useState(false);
 
   const businessName = vendor?.businessName || "Vendor";
   const vendorEmail = vendor?.email || "Vendor account";
@@ -77,7 +87,7 @@ function Topbar({ vendor }) {
       if (!silent) {
         setNotificationError(
           requestError.response?.data?.message ||
-            "Unable to load notifications"
+          "Unable to load notifications"
         );
       }
     } finally {
@@ -99,15 +109,30 @@ function Topbar({ vendor }) {
     const closeMenus = (event) => {
       const clickedNotifications =
         notificationRef.current?.contains(event.target);
-      const clickedVendorMenu = vendorMenuRef.current?.contains(event.target);
 
-      if (!clickedNotifications) setNotificationsOpen(false);
-      if (!clickedVendorMenu) setVendorMenuOpen(false);
+      const clickedHelpMenu =
+        helpMenuRef.current?.contains(event.target);
+
+      const clickedVendorMenu =
+        vendorMenuRef.current?.contains(event.target);
+
+      if (!clickedNotifications) {
+        setNotificationsOpen(false);
+      }
+
+      if (!clickedHelpMenu) {
+        setHelpMenuOpen(false);
+      }
+
+      if (!clickedVendorMenu) {
+        setVendorMenuOpen(false);
+      }
     };
 
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
         setNotificationsOpen(false);
+        setHelpMenuOpen(false);
         setVendorMenuOpen(false);
       }
     };
@@ -123,14 +148,26 @@ function Topbar({ vendor }) {
 
   const toggleNotifications = () => {
     const nextOpen = !notificationsOpen;
+
     setNotificationsOpen(nextOpen);
+    setHelpMenuOpen(false);
     setVendorMenuOpen(false);
-    if (nextOpen) loadNotifications();
+
+    if (nextOpen) {
+      loadNotifications();
+    }
   };
 
   const toggleVendorMenu = () => {
     setVendorMenuOpen((current) => !current);
     setNotificationsOpen(false);
+    setHelpMenuOpen(false);
+  };
+
+  const toggleHelpMenu = () => {
+    setHelpMenuOpen((current) => !current);
+    setNotificationsOpen(false);
+    setVendorMenuOpen(false);
   };
 
   const openNotification = async (notification) => {
@@ -166,9 +203,33 @@ function Topbar({ vendor }) {
     }
   };
 
+  const openWhatsAppSupport = () => {
+    const whatsappUrl =
+      `https://wa.me/${ADMIN_PHONE_NUMBER}` +
+      `?text=${encodeURIComponent(
+        ADMIN_WHATSAPP_MESSAGE
+      )}`;
+
+    setHelpMenuOpen(false);
+
+    window.open(
+      whatsappUrl,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
+  const callAdmin = () => {
+    setHelpMenuOpen(false);
+
+    window.location.href =
+      `tel:+${ADMIN_PHONE_NUMBER}`;
+  };
+
   const handleLogout = () => {
     setVendorMenuOpen(false);
     setNotificationsOpen(false);
+    setHelpMenuOpen(false);
 
     localStorage.removeItem("vendorToken");
     localStorage.removeItem("vendor");
@@ -210,9 +271,8 @@ function Topbar({ vendor }) {
                   <h2>Notifications</h2>
                   <p>
                     {unreadCount
-                      ? `${unreadCount} unread notification${
-                          unreadCount === 1 ? "" : "s"
-                        }`
+                      ? `${unreadCount} unread notification${unreadCount === 1 ? "" : "s"
+                      }`
                       : "You're all caught up"}
                   </p>
                 </div>
@@ -238,9 +298,8 @@ function Topbar({ vendor }) {
                     const Icon = notificationIcon(notification.type);
                     return (
                       <button
-                        className={`notification-item ${
-                          notification.isRead ? "read" : "unread"
-                        }`}
+                        className={`notification-item ${notification.isRead ? "read" : "unread"
+                          }`}
                         type="button"
                         onClick={() => openNotification(notification)}
                         key={notification.id}
@@ -275,9 +334,88 @@ function Topbar({ vendor }) {
           )}
         </div>
 
-        <button className="icon-button" type="button" aria-label="Messages">
-          <Mail size={18} />
-        </button>
+        <div
+          className="help-menu-wrapper"
+          ref={helpMenuRef}
+        >
+          <button
+            className={`icon-button ${helpMenuOpen ? "active" : ""
+              }`}
+            type="button"
+            onClick={toggleHelpMenu}
+            aria-label="Contact admin for help"
+            aria-haspopup="dialog"
+            aria-expanded={helpMenuOpen}
+          >
+            <HelpCircle size={19} />
+          </button>
+
+          {helpMenuOpen && (
+            <section
+              className="vendor-help-dropdown"
+              role="dialog"
+              aria-label="Vendor support options"
+            >
+              <header className="vendor-help-header">
+                <span className="vendor-help-header-icon">
+                  <HelpCircle size={20} />
+                </span>
+
+                <div>
+                  <h2>Need help?</h2>
+
+                  <p>
+                    Contact the administrator using one of
+                    the options below.
+                  </p>
+                </div>
+              </header>
+
+              <div className="vendor-help-options">
+                <button
+                  type="button"
+                  className="vendor-help-option whatsapp"
+                  onClick={openWhatsAppSupport}
+                >
+                  <span className="vendor-help-option-icon">
+                    <MessageCircle size={19} />
+                  </span>
+
+                  <span>
+                    <strong>WhatsApp Admin</strong>
+                    <small>
+                      Send a WhatsApp support message
+                    </small>
+                  </span>
+
+                  <b aria-hidden="true">›</b>
+                </button>
+
+                <button
+                  type="button"
+                  className="vendor-help-option call"
+                  onClick={callAdmin}
+                >
+                  <span className="vendor-help-option-icon">
+                    <Phone size={18} />
+                  </span>
+
+                  <span>
+                    <strong>Call Admin</strong>
+                    <small>{ADMIN_DISPLAY_NUMBER}</small>
+                  </span>
+
+                  <b aria-hidden="true">›</b>
+                </button>
+              </div>
+
+              <p className="vendor-help-note">
+                Calling is available on devices that support
+                phone calls.
+              </p>
+            </section>
+          )}
+        </div>
 
         <span className="topbar-divider" />
 

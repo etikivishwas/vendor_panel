@@ -405,6 +405,314 @@ textarea:focus-visible {
   white-space: nowrap;
 }
 
+.profile-section-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.profile-section-title-row p {
+  margin: 6px 0 0;
+  color: var(--vp-muted);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.business-hours-subsection {
+  display: grid;
+}
+
+.business-hours-heading {
+  margin-bottom: 18px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.business-hours-heading h3 {
+  margin: 0;
+  color: var(--vp-text);
+  font-size: 15px;
+}
+
+.business-hours-heading p {
+  margin: 5px 0 0;
+  color: var(--vp-muted);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.business-hours-note {
+  margin: 11px 0 0;
+  color: var(--vp-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.special-hours-divider {
+  margin: 25px 0;
+  border-top: 1px solid var(--vp-line);
+}
+
+.add-special-hours-button {
+  min-height: 38px;
+  padding: 0 14px;
+  flex-shrink: 0;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--vp-primary);
+  border: 1px solid var(--vp-primary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    transform 0.15s;
+}
+
+.add-special-hours-button:hover:not(:disabled) {
+  background: var(--vp-primary-dark);
+  border-color: var(--vp-primary-dark);
+  transform: translateY(-1px);
+}
+
+.add-special-hours-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.special-hours-empty {
+  min-height: 105px;
+  padding: 20px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  background: var(--vp-surface);
+  border: 1px dashed #b9d8d3;
+  border-radius: 10px;
+}
+
+.special-hours-empty strong {
+  color: var(--vp-text);
+  font-size: 13px;
+}
+
+.special-hours-empty span {
+  margin-top: 6px;
+  color: var(--vp-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.special-hours-list {
+  display: grid;
+  gap: 14px;
+}
+
+.special-hours-card {
+  padding: 17px;
+  background: #fbfdfd;
+  border: 1px solid var(--vp-line);
+  border-radius: 10px;
+}
+
+.special-hours-card-header {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.special-hours-card-header strong {
+  color: var(--vp-text);
+  font-size: 12px;
+}
+
+.special-hours-card-header button {
+  padding: 5px 8px;
+  color: var(--vp-danger);
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--vp-danger-soft);
+  border: 1px solid #efc7ce;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.special-hours-card-header button:hover:not(:disabled) {
+  background: #ffe8ec;
+}
+
+.special-hours-main-fields {
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 0.7fr) minmax(220px, 1.3fr);
+  gap: 18px;
+}
+
+.special-hours-closed {
+  margin-top: 15px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--vp-text);
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.special-hours-closed input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--vp-primary);
+}
+
+.special-hours-time-fields {
+  margin-top: 16px;
+}
+
+.special-hours-limit {
+  margin-top: 11px;
+  color: var(--vp-muted);
+  font-size: 9px;
+  text-align: right;
+}
+
+.business-location-map-shell {
+  margin-bottom: 22px;
+  padding: 16px;
+  background: var(--vp-surface);
+  border: 1px solid var(--vp-line);
+  border-radius: 11px;
+}
+
+.business-location-map-heading {
+  margin-bottom: 13px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.business-location-map-heading > div {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.business-location-map-heading strong {
+  color: var(--vp-text);
+  font-size: 13px;
+}
+
+.business-location-map-heading span {
+  color: var(--vp-muted);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.use-current-location-button {
+  min-height: 38px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  color: var(--vp-primary-dark);
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--vp-white);
+  border: 1px solid var(--vp-primary);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.use-current-location-button:hover:not(:disabled) {
+  background: var(--vp-primary-soft);
+}
+
+.use-current-location-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.business-location-map {
+  position: relative;
+  height: 340px;
+  overflow: hidden;
+  background: #dcefeb;
+  border: 1px solid var(--vp-line);
+  border-radius: 10px;
+}
+
+.business-location-leaflet-map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.business-location-map-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--vp-primary-dark);
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(2px);
+}
+
+.selected-coordinate-row {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--vp-muted);
+  font-size: 9px;
+}
+
+.selected-coordinate-row svg {
+  color: var(--vp-primary);
+}
+
+.business-location-map-status {
+  margin: 7px 0 0;
+  color: var(--vp-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+@media (max-width: 620px) {
+  .business-location-map-shell {
+    padding: 12px;
+  }
+
+  .business-location-map-heading {
+    flex-direction: column;
+  }
+
+  .use-current-location-button {
+    width: 100%;
+  }
+
+  .business-location-map {
+    height: 280px;
+  }
+}
+
 @keyframes profile-spin {
   to {
     transform: rotate(360deg);
@@ -493,6 +801,23 @@ textarea:focus-visible {
   .profile-cancel-button,
   .profile-save-button {
     flex: 1;
+  }
+
+  .profile-section-title-row,
+  .business-hours-heading {
+    flex-direction: column;
+  }
+
+  .add-special-hours-button {
+    width: 100%;
+  }
+
+  .special-hours-main-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .special-hours-card {
+    padding: 14px;
   }
 }
 

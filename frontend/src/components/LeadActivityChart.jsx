@@ -6,7 +6,7 @@ import {
   XAxis,
 } from "recharts";
 
-function LeadActivityChart({ data }) {
+function LeadActivityChart({ data, title = "Lead Activity" }) {
   const formattedData = data.map((item) => ({
     ...item,
     label: new Date(`${item.date}T00:00:00`).toLocaleDateString(
@@ -21,7 +21,7 @@ function LeadActivityChart({ data }) {
   return (
     <article className="panel chart-panel">
       <div className="panel-heading">
-        <h2>Lead Activity (30 Days)</h2>
+        <h2>{title}</h2>
         <button type="button">⋮</button>
       </div>
 

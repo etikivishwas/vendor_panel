@@ -24,15 +24,25 @@ export const updateVendorProfile = async ({
     form.categoryId
   );
 
-  formData.append("phone", form.phone);
+  formData.append(
+    "phone",
+    form.phone
+  );
 
   formData.append(
     "whatsapp",
     form.whatsapp
   );
 
-  formData.append("address", form.address);
-  formData.append("city", form.city);
+  formData.append(
+    "address",
+    form.address
+  );
+
+  formData.append(
+    "city",
+    form.city
+  );
 
   formData.append(
     "postalCode",
@@ -40,8 +50,35 @@ export const updateVendorProfile = async ({
   );
 
   formData.append(
+    "latitude",
+    String(form.latitude)
+  );
+
+  formData.append(
+    "longitude",
+    String(form.longitude)
+  );
+
+  formData.append(
     "description",
     form.description
+  );
+
+  formData.append(
+    "openingTime",
+    form.openingTime
+  );
+
+  formData.append(
+    "closingTime",
+    form.closingTime
+  );
+
+  formData.append(
+    "specialHours",
+    JSON.stringify(
+      form.specialHours
+    )
   );
 
   if (logo) {
@@ -55,3 +92,21 @@ export const updateVendorProfile = async ({
 
   return response.data;
 };
+
+export const reverseGeocodeVendorLocation =
+  async ({
+    latitude,
+    longitude,
+  }) => {
+    const response = await apiClient.get(
+      "/vendor/profile/reverse-geocode",
+      {
+        params: {
+          latitude,
+          longitude,
+        },
+      }
+    );
+
+    return response.data;
+  };

@@ -25,6 +25,7 @@ import ForgotPasswordPage from
 
 import ResetPasswordPage from
   "./pages/ResetPasswordPage.jsx";
+import ReviewsPage from "./pages/ReviewsPage.jsx";
 
 function ProtectedRoute({
   children,
@@ -99,6 +100,14 @@ function App() {
         element={
           <ProtectedRoute>
             <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/reviews"
+        element={
+          <ProtectedRoute>
+            <ReviewsPage />
           </ProtectedRoute>
         }
       />
